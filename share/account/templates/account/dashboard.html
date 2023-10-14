@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %} <h1>Dashboard</h1>
+    <p>Это твоя доска</p>
+    {% with total_images_created=request.user.images_created.count %}
+        <p>Welcome to your dashboard.
+            You have bookmarked {{ total_images_created }} image{{ total_images_created|pluralize }}.
+        </p>
+    {% endwith %}
+    <p>Перетащите следующую кнопку на панель инструментов закладок. Добавить в закладки изображения с других сайтов →
+        <a href="javascript:{% include "bookmarklet_launcher.js" %}"
+           class="button">Mark!</a>
+
+
+    <p>Привет, друг! Тут ты можешь <a href="{% url 'edit' %}">изменить свой профиль</a> и <a
+            href="{% url 'password_change' %}"> поменять свой пароль</a></p>
+
+
+
+    <h2>Что интересного произошло, пока тебя не было...</h2>
+    <div id="action-list">
+        {% for action in actions %}
+            {% include "actions/action/detail.html" %}
+        {% endfor %}
+    </div>
+{% endblock %}
