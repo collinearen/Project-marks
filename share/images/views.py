@@ -37,7 +37,7 @@ def image_create(request):
             new_image.user = request.user
             new_image.save()
             create_action(request.user, 'bookmarked image', new_image)
-            messages.success(request, 'Image added successfully')
+            messages.success(request, 'Изображение успешно сохранено!')
             # redirect to new created image detail view
             return redirect(new_image.get_absolute_url())
     else:
