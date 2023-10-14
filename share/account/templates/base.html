@@ -19,6 +19,10 @@
                 <a href="">Мои закладки</a>
             </li>
 
+            <li {% if section == "images" %}class="selected"{% endif %}>
+                <a href="https://macosicons.com/#/">Ico for mac</a>
+            </li>
+
 
             <li {% if section == "images" %}class="selected"{% endif %}>
                 <a href="{% url "images:list" %}">Сохраненные картинки</a>
