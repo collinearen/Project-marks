@@ -11,11 +11,11 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+
 from django.urls import reverse_lazy
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -27,7 +27,6 @@ SECRET_KEY = 'django-insecure-c1bkqgegjaz=lh@wlc29xei-isl$=8nkow6^a09#m7@t%w*-tz
 DEBUG = True
 
 ALLOWED_HOSTS = ['mysite.com', 'localhost', '127.0.0.1']
-
 
 # Application definition
 
@@ -78,7 +77,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'share.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
@@ -88,7 +86,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -108,7 +105,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
@@ -119,7 +115,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
@@ -148,15 +143,15 @@ AUTHENTICATION_BACKENDS = [
     'social_core.backends.google.GoogleOAuth2',
 ]
 
-SOCIAL_AUTH_FACEBOOK_KEY = '' # Facebook App ID
-SOCIAL_AUTH_FACEBOOK_SECRET = '' # Facebook App Secret
+SOCIAL_AUTH_FACEBOOK_KEY = ''  # Facebook App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = ''  # Facebook App Secret
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
 
-SOCIAL_AUTH_TWITTER_KEY = '' # Twitter API Key
-SOCIAL_AUTH_TWITTER_SECRET = '' # Twitter API Secret
+SOCIAL_AUTH_TWITTER_KEY = ''  # Twitter API Key
+SOCIAL_AUTH_TWITTER_SECRET = ''  # Twitter API Secret
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '' # Google Client ID
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '' # Google Client Secret
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = ''  # Google Client ID
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = ''  # Google Client Secret
 
 SOCIAL_AUTH_PIPELINE = [
     'social_core.pipeline.social_auth.social_details',
@@ -183,3 +178,11 @@ INTERNAL_IPS = [
 REDIS_HOST = 'localhost'
 REDIS_PORT = 6379
 REDIS_DB = 0
+
+
+
+if DEBUG:
+    import mimetypes
+
+    mimetypes.add_type('application/javascript', '.js', True)
+    mimetypes.add_type('text/css', '.css', True)

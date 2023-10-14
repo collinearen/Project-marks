@@ -1,18 +1,22 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
-from django.contrib import messages
-from django.shortcuts import get_object_or_404
-from django.http import JsonResponse
-from django.views.decorators.http import require_POST
-from django.http import HttpResponse
-from django.core.paginator import Paginator, EmptyPage, \
-                                  PageNotAnInteger
-from .forms import ImageCreateForm
-from .models import Image
-from actions.utils import create_action
 import redis
 from django.conf import settings
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator, EmptyPage, \
+    PageNotAnInteger
+from django.http import HttpResponse
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
+from django.shortcuts import render, redirect
+from django.views.decorators.http import require_POST
 
+from actions.utils import create_action
+from .forms import ImageCreateForm
+from .models import Image
+
+# соединить с redis
+r = redis.Redis(host=settings.REDIS_HOST, port=settings.REDIS_PORT,
+                db=settings.REDIS_DB)
 
 # connect to redis
 r = redis.Redis(host=settings.REDIS_HOST,
@@ -102,8 +106,8 @@ def image_list(request):
                        'images': images})
     return render(request,
                   'images/image/list.html',
-                   {'section': 'images',
-                    'images': images})
+                  {'section': 'images',
+                   'images': images})
 
 
 @login_required
@@ -114,7 +118,7 @@ def image_ranking(request):
     image_ranking_ids = [int(id) for id in image_ranking]
     # get most viewed images
     most_viewed = list(Image.objects.filter(
-                           id__in=image_ranking_ids))
+        id__in=image_ranking_ids))
     most_viewed.sort(key=lambda x: image_ranking_ids.index(x.id))
     return render(request,
                   'images/image/ranking.html',
