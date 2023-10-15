@@ -2,6 +2,7 @@ import redis
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.core.paginator import Paginator, EmptyPage, \
     PageNotAnInteger
 from django.http import HttpResponse
@@ -123,3 +124,33 @@ def image_ranking(request):
                   'images/image/ranking.html',
                   {'section': 'images',
                    'most_viewed': most_viewed})
+
+
+@login_required
+def user_images_list(request, user_id):
+    user = User.objects.get(id=user_id)
+    images = Image.objects.filter(user=user)
+    paginator = Paginator(images, 8)
+    page = request.GET.get('page')
+    images_only = request.GET.get('images_only')
+    try:
+        images = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer deliver the first page
+        images = paginator.page(1)
+    except EmptyPage:
+        if images_only:
+            # If AJAX request and page out of range
+            # return an empty page
+            return HttpResponse('')
+        # If page out of range return last page of results
+        images = paginator.page(paginator.num_pages)
+    if images_only:
+        return render(request,
+                      'images/image/user_image_list.html',
+                      {'section': 'images',
+                       'images': images})
+    return render(request,
+                  'images/image/user_image_list.html',
+                  {'section': 'images',
+                   'images': images})

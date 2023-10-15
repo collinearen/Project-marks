@@ -16,7 +16,7 @@
             </li>
 
             <li {% if section == "images" %}class="selected"{% endif %}>
-                <a href="">Закладки</a>
+                <a href="{% url 'images:user_images_list' user.id %}">Закладки</a>
             </li>
 
             <li {% if section == "images" %}class="selected"{% endif %}>
