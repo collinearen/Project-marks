@@ -81,7 +81,13 @@ def edit(request):
 
 @login_required
 def user_list(request):
-    users = User.objects.filter(is_active=True)
+
+    active_users = Profile.objects.filter(active=True)
+    user_ids = active_users.values_list('user_id', flat=True)
+    active_user_ids = list(user_ids)
+    # И затем использовать filter
+    users = User.objects.filter(id__in=active_user_ids)
+
     return render(request,
                   'account/user/list.html',
                   {'section': 'people',

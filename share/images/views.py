@@ -11,6 +11,7 @@ from django.shortcuts import get_object_or_404
 from django.shortcuts import render, redirect
 from django.views.decorators.http import require_POST
 
+from account.models import Profile
 from actions.utils import create_action
 from .forms import ImageCreateForm
 from .models import Image
@@ -33,9 +34,16 @@ def image_create(request):
         if form.is_valid():
             # form data is valid
             cd = form.cleaned_data
+
             new_image = form.save(commit=False)
             # assign current user to the item
             new_image.user = request.user
+
+            # Обновляем информацию в модели Profile, что пользователь, добавивший новую фотографию, считается активным
+            profile = Profile.objects.get_or_create(user=request.user)[0]
+            profile.active = True
+            profile.save()
+
             new_image.save()
             create_action(request.user, 'поделился', new_image)
             messages.success(request, 'Изображение успешно сохранено!')

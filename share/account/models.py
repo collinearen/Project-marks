@@ -1,9 +1,10 @@
-from django.db import models
 from django.conf import settings
 from django.contrib.auth import get_user_model
+from django.db import models
 
 
 class Profile(models.Model):
+    active = models.BooleanField(default=False)
     user = models.OneToOneField(settings.AUTH_USER_MODEL,
                                 on_delete=models.CASCADE)
     date_of_birth = models.DateField(blank=True, null=True)
@@ -37,6 +38,6 @@ class Contact(models.Model):
 user_model = get_user_model()
 user_model.add_to_class('following',
                         models.ManyToManyField('self',
-                            through=Contact,
-                            related_name='followers',
-                            symmetrical=False))
+                                               through=Contact,
+                                               related_name='followers',
+                                               symmetrical=False))
