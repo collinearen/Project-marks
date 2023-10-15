@@ -36,7 +36,7 @@ def image_create(request):
             # assign current user to the item
             new_image.user = request.user
             new_image.save()
-            create_action(request.user, 'bookmarked image', new_image)
+            create_action(request.user, 'поделился', new_image)
             messages.success(request, 'Изображение успешно сохранено!')
             # redirect to new created image detail view
             return redirect(new_image.get_absolute_url())
@@ -72,7 +72,7 @@ def image_like(request):
             image = Image.objects.get(id=image_id)
             if action == 'like':
                 image.users_like.add(request.user)
-                create_action(request.user, 'likes', image)
+                create_action(request.user, 'лайкнул', image)
             else:
                 image.users_like.remove(request.user)
             return JsonResponse({'status': 'ok'})
@@ -113,8 +113,7 @@ def image_list(request):
 @login_required
 def image_ranking(request):
     # get image ranking dictionary
-    image_ranking = r.zrange('image_ranking', 0, -1,
-                             desc=True)[:10]
+    image_ranking = r.zrange('image_ranking', 0, -1, desc=True)[:10]
     image_ranking_ids = [int(id) for id in image_ranking]
     # get most viewed images
     most_viewed = list(Image.objects.filter(
