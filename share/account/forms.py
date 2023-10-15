@@ -42,11 +42,11 @@ class UserEditForm(forms.ModelForm):
         qs = User.objects.exclude(id=self.instance.id) \
             .filter(email=data)
         if qs.exists():
-            raise forms.ValidationError('Email already in use.')
+            raise forms.ValidationError('Этот Email уже используется')
         return data
 
 
 class ProfileEditForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['date_of_birth', 'photo']
+        fields = ['photo']
