@@ -137,28 +137,32 @@ def image_ranking(request):
 @login_required
 def user_images_list(request, user_id):
     user = User.objects.get(id=user_id)
-    images = Image.objects.filter(user=user)
-    paginator = Paginator(images, 8)
-    page = request.GET.get('page')
-    images_only = request.GET.get('images_only')
-    try:
-        images = paginator.page(page)
-    except PageNotAnInteger:
-        # If page is not an integer deliver the first page
-        images = paginator.page(1)
-    except EmptyPage:
+    cur_user = request.user
+    if user_id == cur_user.id:
+        images = Image.objects.filter(user=user)
+        paginator = Paginator(images, 8)
+        page = request.GET.get('page')
+        images_only = request.GET.get('images_only')
+        try:
+            images = paginator.page(page)
+        except PageNotAnInteger:
+            # If page is not an integer deliver the first page
+            images = paginator.page(1)
+        except EmptyPage:
+            if images_only:
+                # If AJAX request and page out of range
+                # return an empty page
+                return HttpResponse('')
+            # If page out of range return last page of results
+            images = paginator.page(paginator.num_pages)
         if images_only:
-            # If AJAX request and page out of range
-            # return an empty page
-            return HttpResponse('')
-        # If page out of range return last page of results
-        images = paginator.page(paginator.num_pages)
-    if images_only:
+            return render(request,
+                          'images/image/user_image_list.html',
+                          {'section': 'images',
+                           'images': images})
         return render(request,
                       'images/image/user_image_list.html',
                       {'section': 'images',
                        'images': images})
-    return render(request,
-                  'images/image/user_image_list.html',
-                  {'section': 'images',
-                   'images': images})
+    else:
+        return render(request, "images/notfound/NotFound.html")
