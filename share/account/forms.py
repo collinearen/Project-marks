@@ -10,9 +10,9 @@ class LoginForm(forms.Form):
 
 
 class UserRegistrationForm(forms.ModelForm):
-    password = forms.CharField(label='Password',
+    password = forms.CharField(label='Пароль',
                                widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Repeat password',
+    password2 = forms.CharField(label='Повторите пароль',
                                 widget=forms.PasswordInput)
 
     class Meta:
@@ -22,7 +22,7 @@ class UserRegistrationForm(forms.ModelForm):
     def clean_password2(self):
         cd = self.cleaned_data
         if cd['password'] != cd['password2']:
-            raise forms.ValidationError('Passwords don\'t match.')
+            raise forms.ValidationError('Пароли не совпадают')
         return cd['password2']
 
     def clean_email(self):
@@ -39,8 +39,7 @@ class UserEditForm(forms.ModelForm):
 
     def clean_email(self):
         data = self.cleaned_data['email']
-        qs = User.objects.exclude(id=self.instance.id) \
-            .filter(email=data)
+        qs = User.objects.exclude(id=self.instance.id).filter(email=data)
         if qs.exists():
             raise forms.ValidationError('Этот Email уже используется')
         return data

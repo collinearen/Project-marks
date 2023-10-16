@@ -8,8 +8,7 @@ from django.views.decorators.http import require_POST
 
 from actions.models import Action
 from actions.utils import create_action
-from .forms import UserRegistrationForm, \
-    UserEditForm, ProfileEditForm
+from .forms import UserRegistrationForm, UserEditForm, ProfileEditForm
 from .models import Contact
 from .models import Profile
 
@@ -81,7 +80,6 @@ def edit(request):
 
 @login_required
 def user_list(request):
-
     active_users = Profile.objects.filter(active=True)
     user_ids = active_users.values_list('user_id', flat=True)
     active_user_ids = list(user_ids)
