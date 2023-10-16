@@ -41,9 +41,9 @@ ol {
 #header {
     padding: 14px 100px;
     font-size: 15px;
-    background: #9fa0e4;
-    color: #5c2929;
-    border-bottom: 4px solid #9fa0e4;
+    background: #336699;
+    color: #FFFF99;
+    border-bottom: 4px solid #336699;
     overflow: auto;
 }
 
