@@ -9,6 +9,7 @@
     <a href="{{ image.image.url }}">
         <img src="
 
+
                 {% if image.image %}{% thumbnail image.image 180x180 %}{% else %}{% static 'def_img/default.png' %}{% endif %}"
              class="image-detail">
     </a>
@@ -23,7 +24,7 @@
                 <span class="count">
           {{ total_views }} view{{ total_views|pluralize }}
         </span>
-                <a href="#" data-id="{{ image.id }}" data-action="{% if request.user in users_like %}un{% endif %}like"
+                <a href="" data-id="{{ image.id }}" data-action="{% if request.user in users_like %}un{% endif %}like"
                    class="like button">
                     {% if request.user not in users_like %}
                         Like
@@ -42,7 +43,8 @@
             {% for user in users_like %}
                 <div>
                     {% if user.profile.photo %}
-                        <img src="{{ user.profile.photo.url }}">
+                        <img src="{% if user.profile.photo.url %}{{ user.profile.photo.url }} {% else %}{% static 'def_img/default.png' %}{% endif %}">
+
                     {% endif %}
                     <p>{{ user.first_name }}</p>
                 </div>

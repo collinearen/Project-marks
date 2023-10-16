@@ -4,10 +4,12 @@ body {
     margin: 0;
     padding: 0;
     font-family: "cursive", sans-serif;
+
 }
 
 p {
     line-height: 1.8;
+
 }
 
 a {
@@ -48,6 +50,8 @@ ol {
     color: #FFFF99;
     border-bottom: 4px solid #336699;
     overflow: auto;
+
+
 }
 
 #header .logo {
@@ -56,6 +60,7 @@ ol {
     color: wheat;
     font-size: 20px;
     margin-right: 10%;
+
 }
 
 #header ul.menu {
@@ -77,10 +82,12 @@ ol {
 
 #header a {
     color: #f3f7cc;
+
 }
 
 #header a:hover {
     color: #fff;
+
 }
 
 #header .user {
@@ -90,7 +97,8 @@ ol {
 
 #content {
     padding: 30px 100px;
-    background: white;
+
+
 }
 
 /* forms */
@@ -273,7 +281,8 @@ a.like, a.follow {
 }
 
 #image-list {
-    overflow: hidden;
+    max-width: 60%;
+    grid-row: initial;
 }
 
 #image-list .image {
@@ -283,21 +292,29 @@ a.like, a.follow {
     margin: 0 10px 10px 10px;
     border-top: 8px solid white;
     border-radius: 10%;
-    background: blanchedalmond;
+
+    background: antiquewhite;
 }
 
 #image-list img {
+
     width: 220px;
     height: 220px;
     border-radius: 10%;
+
 }
 
 #image-list .info {
     padding: 10px;
+    text-align: center;
 }
 
 #image-list .info a {
-    color: #333;
+    color: #696b4e;
+}
+
+.row img {
+
 }
 
 .image-likes div {
