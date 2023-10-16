@@ -4,7 +4,6 @@ body {
     margin: 0;
     padding: 0;
     font-family: "cursive", sans-serif;
-
 }
 
 p {
@@ -13,14 +12,19 @@ p {
 }
 
 a {
+
     color: darkblue;
     text-decoration: none;
-    border-radius: 10%;
+
 }
 
+
 a:hover {
-    color: #00a74f;
-    border-radius: 10%;
+    display: inline-block;
+    transition: transform 0.3s ease;
+    color: #ff0087;
+    transform: scale(1.07);
+
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -29,7 +33,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-    border-bottom: 1px solid #bbb;
+    border-bottom: 2px solid #bbb;
     padding: 0 0 10px 0;
     margin: 10px 0 20px 0;
 }
@@ -107,7 +111,6 @@ ol {
 form {
 
     background: white;
-
     overflow: auto;
 }
 
@@ -295,7 +298,7 @@ a.like, a.follow {
     border-top: 8px solid white;
     border-radius: 10%;
 
-    background: antiquewhite;
+    background: #EAE0C8;
 }
 
 #image-list img {
@@ -388,26 +391,39 @@ img.user-detail {
 }
 
 .like-text {
-    font-family: Jura, sans-serif;
+    font-family: "Roboto Light", sans-serif;
     color: dodgerblue;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1)
 }
 
 .button-mark {
 
-    font-family: Jura sans-serif;
-    background: cornflowerblue;
+    font-size: 16px;
+    padding: 1em 3.3em;
+    transform: perspective(200px) rotateX(15deg);
     color: white;
-    padding: 10px 20px;
-    font-size: 18px;
-    text-transform: uppercase;
-    border-radius: 100px 100px 100px 100px / 200% 200%;
-    box-shadow: 0px 10px 15px 0px rgba(255, 111, 170, 0.75);
-    text-shadow: 1px 1px 2px gray, 0 0 1em coral;
-    background: linear-gradient(0deg, #ec212b, #fa7169);
+    font-weight: 900;
+    border: none;
+    border-radius: 5px;
+    background: linear-gradient(0deg, rgba(63, 94, 251, 1) 0%, rgba(70, 135, 252, 1) 100%);
+    box-shadow: rgba(63, 94, 251, 0.2) 0px 40px 29px 0px;
+    will-change: transform;
+    transition: all 0.3s;
+    border-bottom: 2px solid rgba(70, 135, 252, 1);
 }
+
+button-mark:hover {
+  transform: perspective(180px) rotateX(30deg) translateY(2px);
+}
+
+button-mark:active {
+  transform: perspective(170px) rotateX(36deg) translateY(5px);
+}
+
 
 .container-rating {
     font-family: Jura, sans-serif;
+
     color: dodgerblue;
     text-align: center;
 }
