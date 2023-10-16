@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %} <h1 class="like-text">Это твоя доска</h1>
+    {% with total_images_created=request.user.images_created.count %}
+        <p>
+            Сохраненных изображений: {{ total_images_created }}
+        </p>
+    {% endwith %}
+    <p>Перетащите следующую кнопку на панель инструментов закладок. Добавить в закладки изображения с других сайтов →
+        <a href="javascript:{% include "bookmarklet_launcher.js" %}"
+           class="button-mark">Mark!</a>
+    <h2 class="like-text">Что интересного произошло, пока тебя не было...</h2>
+    <div id="action-list">
+        {% for action in actions %}
+            {% include "actions/action/detail.html" %}
+        {% endfor %}
+    </div>
+
+
+{% endblock %}
