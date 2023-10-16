@@ -1,9 +1,9 @@
-@import url(//fonts.googleapis.com/css?family=Muli);
+@import url(//fonts.googleapis.com/css?family=Jura);
 
 body {
     margin: 0;
     padding: 0;
-    font-family: helvetica, sans-serif;
+    font-family: "cursive", sans-serif;
 }
 
 p {
@@ -11,12 +11,14 @@ p {
 }
 
 a {
-    color: #9fa0e4;
+    color: darkblue;
     text-decoration: none;
+    border-radius: 10%;
 }
 
 a:hover {
     color: #00a74f;
+    border-radius: 10%;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -41,6 +43,7 @@ ol {
 #header {
     padding: 14px 100px;
     font-size: 15px;
+    font-family: Jura, sans-serif;
     background: #336699;
     color: #FFFF99;
     border-bottom: 4px solid #336699;
@@ -48,9 +51,9 @@ ol {
 }
 
 #header .logo {
-    font-family: 'Muli', sans-serif;
+    font-family: 'Jura', sans-serif;
     float: left;
-    color: #f3f7cc;
+    color: wheat;
     font-size: 20px;
     margin-right: 10%;
 }
@@ -121,16 +124,12 @@ input, textarea {
 }
 
 input[type=submit], a.button {
-    font-weight: bold;
-    background: #9fa0e4;
+    font-family: Jura sans-serif;
+    background: cornflowerblue;
     color: white;
     padding: 10px 20px;
     font-size: 18px;
-    text-transform: uppercase;
-    border-radius: 100px 100px 100px 100px / 200% 200%;
-    box-shadow: 0px 10px 15px 0px rgba(255, 111, 170, 0.75);
-    text-shadow: 1px 1px 2px gray, 0 0 1em red;
-    background: linear-gradient( 0deg, #ec212b, #fa7169);
+
 }
 
 .errorlist {
@@ -283,12 +282,14 @@ a.like, a.follow {
     height: 300px;
     margin: 0 10px 10px 10px;
     border-top: 8px solid white;
-    background: #FFF0F5;
+    border-radius: 10%;
+    background: blanchedalmond;
 }
 
 #image-list img {
     width: 220px;
     height: 220px;
+    border-radius: 10%;
 }
 
 #image-list .info {
@@ -332,7 +333,7 @@ a.like, a.follow {
 }
 
 img.user-detail {
-    border-radius: 50%;
+    border-radius: 10%;
     float: left;
 }
 
@@ -362,3 +363,26 @@ img.user-detail {
     color: #ccc;
 }
 
+.dropdown {
+    display: inline-block;
+    position: relative;
+}
+
+.like-text {
+    font-family: Jura, sans-serif;
+    color: dodgerblue;
+}
+
+.button-mark {
+
+    font-family: Jura sans-serif;
+    background: cornflowerblue;
+    color: white;
+    padding: 10px 20px;
+    font-size: 18px;
+    text-transform: uppercase;
+    border-radius: 100px 100px 100px 100px / 200% 200%;
+    box-shadow: 0px 10px 15px 0px rgba(255, 111, 170, 0.75);
+    text-shadow: 1px 1px 2px gray, 0 0 1em coral;
+    background: linear-gradient(0deg, #ec212b, #fa7169);
+}

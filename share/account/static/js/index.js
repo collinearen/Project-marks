@@ -6,5 +6,4 @@ var confirmDelete = (function (element) {
     } else {
         element.remove();
     }
-
 });

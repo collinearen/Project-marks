@@ -7,8 +7,12 @@
     <h1>{{ image.title }}</h1>
 
     <a href="{{ image.image.url }}">
-        <img src="{% if image.image %}{% thumbnail image.image 180x180 %}{% else %}{% static 'def_img/default.png' %}{% endif %}" class="image-detail">
+        <img src="
+
+                {% if image.image %}{% thumbnail image.image 180x180 %}{% else %}{% static 'def_img/default.png' %}{% endif %}"
+             class="image-detail">
     </a>
+
     {% with total_likes=image.users_like.count users_like=image.users_like.all %}
         <div class="image-info">
             <div>
@@ -28,8 +32,12 @@
                     {% endif %}
                 </a>
             </div>
+            <p class="like-text">Описание</p>
             {{ image.description|linebreaks }}
         </div>
+
+
+
         <div class="image-likes">
             {% for user in users_like %}
                 <div>
@@ -42,6 +50,7 @@
                 Пока что никто не оценил это изображение
             {% endfor %}
         </div>
+
     {% endwith %}
 {% endblock %}
 
