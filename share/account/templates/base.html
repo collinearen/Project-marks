@@ -15,12 +15,6 @@
                 <a href="{% url "dashboard" %}">Моя доска</a>
             </li>
 
-
-            <li {% if section == "rating" %}class="selected"{% endif %}>
-                <a href="{% url "images:ranking" %}">Рейтинг</a>
-            </li>
-
-
             <li {% if section == "images" %}class="selected"{% endif %}>
                 <a href="{% url 'images:user_images_list' user.id %}">Закладки</a>
             </li>

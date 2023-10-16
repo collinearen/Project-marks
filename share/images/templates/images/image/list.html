@@ -11,10 +11,11 @@
     <h2 class="container-rating">Рейтинг по популярности</h2>
     <ol class="container-rating">
         {% for image in most_viewed %}
-            <li>
+            <p>
                 <a href="{{ image.get_absolute_url }}">
                     {{ image.title }}
-                </a></li>
+                </a>
+            </p>
         {% endfor %}
     </ol>
 {% endblock %}
