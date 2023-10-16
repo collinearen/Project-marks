@@ -39,7 +39,9 @@ h2 {
 }
 
 ol {
-    line-height: 1.5;
+
+    text-align: center;
+    line-height: 2.3;
 }
 
 #header {
@@ -402,4 +404,10 @@ img.user-detail {
     box-shadow: 0px 10px 15px 0px rgba(255, 111, 170, 0.75);
     text-shadow: 1px 1px 2px gray, 0 0 1em coral;
     background: linear-gradient(0deg, #ec212b, #fa7169);
+}
+
+.container-rating {
+    font-family: Jura, sans-serif;
+    color: dodgerblue;
+    text-align: center;
 }
