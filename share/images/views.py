@@ -98,7 +98,7 @@ def image_list(request):
     images_only = request.GET.get('images_only')
 
     # <-- rating -->
-    image_ranking = r.zrange('image_ranking', 0, -1, desc=True)[:10]
+    image_ranking = r.zrange('image_ranking', 0, -1, desc=True)[10:]
     image_ranking_ids = [int(id) for id in image_ranking]
 
     most_viewed = list(Image.objects.filter(id__in=image_ranking_ids))

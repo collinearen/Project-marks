@@ -10,6 +10,8 @@
         <img src="
 
 
+
+
                 {% if image.image %}{% thumbnail image.image 180x180 %}{% else %}{% static 'def_img/default.png' %}{% endif %}"
              class="image-detail">
     </a>
@@ -38,12 +40,14 @@
         </div>
 
 
-
         <div class="image-likes">
             {% for user in users_like %}
+                <h2>Пользователям понравилось...</h2>
                 <div>
                     {% if user.profile.photo %}
-                        <img src="{% if user.profile.photo.url %}{{ user.profile.photo.url }} {% else %}{% static 'def_img/default.png' %}{% endif %}">
+                        <img src="
+
+                                {% if user.profile.photo.url %}{{ user.profile.photo.url }} {% else %}{% static 'def_img/default.png' %}{% endif %}">
 
                     {% endif %}
                     <p>{{ user.first_name }}</p>
