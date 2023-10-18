@@ -60,6 +60,7 @@ def image_create(request):
 
 def image_detail(request, id, slug):
     image = get_object_or_404(Image, id=id, slug=slug)
+
     # increment total image views by 1
     total_views = r.incr(f'image:{image.id}:views')
     # increment image ranking by 1
@@ -173,3 +174,9 @@ def user_images_list(request, user_id):
                        'images': images})
     else:
         return render(request, "images/notfound/NotFound.html")
+
+
+def delete(request, id_image):
+    image = Image.objects.get(id=id_image)
+    image.delete()
+    return render(request, 'images/image/delete_success.html')

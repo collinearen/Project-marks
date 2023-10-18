@@ -38,3 +38,7 @@ class Image(models.Model):
 
     def get_absolute_url(self):
         return reverse('images:detail', args=[self.id, self.slug])
+
+    def delete(self, *args, **kwargs):
+        self.image.delete(*args, **kwargs)
+        super().delete(*args, **kwargs)
