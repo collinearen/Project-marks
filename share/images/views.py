@@ -12,9 +12,11 @@ from django.shortcuts import render, redirect
 from django.views.decorators.http import require_POST
 
 from account.models import Profile
-from actions.utils import create_action
+from actions.utils import create_action, delete_action
 from .forms import ImageCreateForm
 from .models import Image
+from django.db import transaction
+from actions.models import Action
 
 # соединить с redis
 r = redis.Redis(host=settings.REDIS_HOST, port=settings.REDIS_PORT,
@@ -177,6 +179,19 @@ def user_images_list(request, user_id):
 
 
 def delete(request, id_image):
-    image = Image.objects.get(id=id_image)
-    image.delete()
+    '''
+    Здесь мы используем менеджер транзакций для обеспечения атомарности операции удаления,
+    а также фильтр для выбора записей,
+    которые нужно удалить. Если во время удаления возникнет ошибка,
+    транзакция будет откачена и исключение будет обработано.
+    Здесь мы получаем image_id картинки, которую пользователь хочет удалить,
+     и через этот image_id мы удаляем ее в таблице Image и все записи в Actions, связанные с этой картиной
+    '''
+    try:
+        with transaction.atomic():
+            image = Image.objects.get(id=id_image)
+            image.delete()
+            Action.objects.filter(target_id=id_image).delete()
+    except Exception as e:
+        print(e)
     return render(request, 'images/image/delete_success.html')
