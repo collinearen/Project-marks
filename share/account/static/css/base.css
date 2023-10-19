@@ -115,6 +115,7 @@ form {
 form p {
     width: 100%;
     overflow: auto;
+
 }
 
 label {
@@ -128,15 +129,18 @@ input, textarea {
     clear: both;
     float: left;
     margin: 0 0 10px;
+    border-radius: 5%;
     background: #efefef;
-    border: 0;
+    border: 3px solid #554;
+
     padding: 6px 10px;
     font-size: 14px;
+
 }
 
 input[type=submit], a.button {
     font-family: Jura sans-serif;
-    background: cornflowerblue;
+    background: dodgerblue;
     color: white;
     padding: 10px 20px;
     font-size: 18px;
@@ -357,7 +361,7 @@ img.user-detail {
     float: left;
 }
 
-img.user_edit_image{
+img.user_edit_image {
     border-radius: 20%;
 
 }
@@ -399,7 +403,7 @@ img.user_edit_image{
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1)
 }
 
-.button-mark {
+button.button-mark {
 
     font-size: 16px;
     padding: 1em 3.3em;
@@ -411,16 +415,8 @@ img.user_edit_image{
     background: linear-gradient(0deg, rgba(63, 94, 251, 1) 0%, rgba(70, 135, 252, 1) 100%);
     box-shadow: rgba(63, 94, 251, 0.2) 0px 40px 29px 0px;
     will-change: transform;
-    transition: all 0.3s;
+    transition: all 5s;
     border-bottom: 2px solid rgba(70, 135, 252, 1);
-}
-
-button-mark:hover {
-  transform: perspective(180px) rotateX(30deg) translateY(2px);
-}
-
-button-mark:active {
-  transform: perspective(170px) rotateX(36deg) translateY(5px);
 }
 
 
@@ -429,4 +425,9 @@ button-mark:active {
 
     color: dodgerblue;
     text-align: center;
+}
+
+.default_image{
+    border-radius: 5%;
+    float: left;
 }

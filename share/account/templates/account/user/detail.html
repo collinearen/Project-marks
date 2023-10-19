@@ -1,41 +1,55 @@
 {% extends "base.html" %}
 {% load thumbnail %}
+{% load static %}
 
 {% block title %}{{ user.get_full_name }}{% endblock %}
 
 {% block content %}
-  <h1 class="like-text">{{ user.get_full_name }}</h1>
-  <div class="profile-info">
-    <img src="{% thumbnail user.profile.photo 180x180 %}" class="user-detail">
-  </div>
-  {% with total_followers=user.followers.count %}
-    <span class="count">
+    <h1 class="like-text">{{ user.get_full_name }}</h1>
+
+
+    {% if user.profile.photo %}
+        <a href="{{ user.get_absolute_url }}">
+            <img class="user_edit_image"
+                 src="
+                     {% thumbnail user.profile.photo 200x200 %}">
+        </a>
+    {% else %}
+        <svg class="default_image" width="200" height="200">
+            <image href="{% static 'def_img/default.png' %}" height="100%" width="100%"
+                   preserveAspectRatio="xMidYMid slice"/>
+        </svg>
+    {% endif %}
+
+    {% with total_followers=user.followers.count %}
+        <span class="count">
       <span class="total">{{ total_followers }}</span>
       follower{{ total_followers|pluralize }}
     </span>
-    <a href="#" data-id="{{ user.id }}" data-action="{% if request.user in user.followers.all %}un{% endif %}follow" class="follow button">
-      {% if request.user not in user.followers.all %}
-        Follow
-      {% else %}
-        Unfollow
-      {% endif %}
-    </a>
-    <div id="image-list" class="image-container">
-      {% include "images/image/list_images.html" with images=user.images_created.all %}
-    </div>
-  {% endwith %}
+        <a href="#" data-id="{{ user.id }}" data-action="{% if request.user in user.followers.all %}un{% endif %}follow"
+           class="follow button">
+            {% if request.user not in user.followers.all %}
+                Follow
+            {% else %}
+                Unfollow
+            {% endif %}
+        </a>
+        <div id="image-list" class="image-container">
+            {% include "images/image/list_images.html" with images=user.images_created.all %}
+        </div>
+    {% endwith %}
 {% endblock %}
 
 {% block domready %}
-  const url = '{% url "user_follow" %}';
-  var options = {
+    const url = '{% url "user_follow" %}';
+    var options = {
     method: 'POST',
     headers: {'X-CSRFToken': csrftoken},
     mode: 'same-origin'
-  }
+    }
 
-  document.querySelector('a.follow')
-          .addEventListener('click', function(e){
+    document.querySelector('a.follow')
+    .addEventListener('click', function(e){
     e.preventDefault();
     var followButton = this;
 
@@ -49,20 +63,20 @@
     fetch(url, options)
     .then(response => response.json())
     .then(data => {
-      if (data['status'] === 'ok')
-      {
-        var previousAction = followButton.dataset.action;
+    if (data['status'] === 'ok')
+    {
+    var previousAction = followButton.dataset.action;
 
-        // toggle button text and data-action
-        var action = previousAction === 'follow' ? 'unfollow' : 'follow';
-        followButton.dataset.action = action;
-        followButton.innerHTML = action;
+    // toggle button text and data-action
+    var action = previousAction === 'follow' ? 'unfollow' : 'follow';
+    followButton.dataset.action = action;
+    followButton.innerHTML = action;
 
-        // update follower count
-        var followerCount = document.querySelector('span.count .total');
-        var totalFollowers = parseInt(followerCount.innerHTML);
-        followerCount.innerHTML = previousAction === 'follow' ? totalFollowers + 1 : totalFollowers - 1;
-      }
+    // update follower count
+    var followerCount = document.querySelector('span.count .total');
+    var totalFollowers = parseInt(followerCount.innerHTML);
+    followerCount.innerHTML = previousAction === 'follow' ? totalFollowers + 1 : totalFollowers - 1;
+    }
     })
-  });
+    });
 {% endblock %}
