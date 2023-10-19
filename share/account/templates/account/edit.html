@@ -1,13 +1,23 @@
 {% extends "base.html" %}
+{% load thumbnail %}
+{% load static %}
 {% block title %}Edit your account{% endblock %}
 {% block content %}
     <h1 class="like-text">Редактирование профиля</h1>
-        <p>Так же ты можешь здесь<a
-            href="{% url 'password_change' %}"> поменять свой пароль</a></p>
+
+    <a href="{{ user.get_absolute_url }}">
+        <img class="user_edit_image"
+             src="
+            {% if user.profile.photo %}{% thumbnail user.profile.photo 180x300 %}{% else %}{% static 'def_img/default.png' %}{% endif %}">
+    </a>
+
+
     <form method="post" enctype="multipart/form-data">
         {{ user_form.as_p }}
         {{ profile_form.as_p }}
         {% csrf_token %}
+         <p>Так же ты можешь здесь<a
+            href="{% url 'password_change' %}"> поменять свой пароль</a></p>
         <p><input type="submit" value="Save changes"></p>
     </form>
 

@@ -357,6 +357,11 @@ img.user-detail {
     float: left;
 }
 
+img.user_edit_image{
+    border-radius: 20%;
+
+}
+
 .profile-info {
     float: left;
     overflow: auto;

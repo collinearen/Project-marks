@@ -9,9 +9,6 @@
     <a href="{{ image.image.url }}">
         <img src="
 
-
-
-
                 {% if image.image %}{% thumbnail image.image 180x180 %}{% else %}{% static 'def_img/default.png' %}{% endif %}"
              class="image-detail">
     </a>
@@ -38,16 +35,17 @@
             <p class="like-text">Описание</p>
             {{ image.description|linebreaks }}
         </div>
+           {% if image.user_id == request.user.id %}
+            <a href="{% url "images:delete" image.id %}">Удалить</a>
+        {% endif %}
 
         <div class="image-likes">
+        <h2>Пользователям понравилось...</h2>
             {% for user in users_like %}
-                <h2>Пользователям понравилось...</h2>
+
                 <div>
                     {% if user.profile.photo %}
                         <img src="
-
-
-
                                 {% if user.profile.photo.url %}{{ user.profile.photo.url }} {% else %}{% static 'def_img/default.png' %}{% endif %}">
                     {% endif %}
                     <p>{{ user.first_name }}</p>
@@ -56,12 +54,6 @@
                 Пока что никто не оценил это изображение
             {% endfor %}
         </div>
-
-
-        {% if image.user_id == request.user.id %}
-            <a href="{% url "images:delete" image.id %}">Удалить</a>
-        {% endif %}
-
 
 
     {% endwith %}
