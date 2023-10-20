@@ -6,8 +6,9 @@
 {% block content %}
     <h1>{{ image.title }}</h1>
 
-    <a  class="image_detail_a" href="{{ image.url_user }}">
+    <a class="image_detail_a" href="{{ image.url_user }}">
         <img src="
+
                 {% if image.image %}{% thumbnail image.image 600x600 %}{% else %}{% static 'def_img/default.png' %}{% endif %}"
              class="image-detail">
     </a>
@@ -31,26 +32,32 @@
                     {% endif %}
                 </a>
             </div>
-            <p class="like-text">Описание</p>
+
+              <p class="like-text">Описание</p>
+         <div class="division_desription_image">
             {{ image.description|linebreaks }}
         </div>
-           {% if image.user_id == request.user.id %}
-            <a href="{% url "images:delete" image.id %}">Удалить картинку</a>
+
+        </div>
+
+        {% if image.user_id == request.user.id %}
+            <a  href="{% url "images:delete" image.id %}" >Удалить картинку</a>
         {% endif %}
 
         <div class="image-likes">
-        <h2>Пользователям понравилось...</h2>
-            {% for user in users_like %}
 
+            {% for user in users_like %}
+                <h2>Пользователям понравилось...</h2>
                 <div>
                     {% if user.profile.photo %}
                         <img src="
+
                                 {% if user.profile.photo.url %}{{ user.profile.photo.url }} {% else %}{% static 'def_img/default.png' %}{% endif %}">
                     {% endif %}
                     <p>{{ user.first_name }}</p>
                 </div>
             {% empty %}
-                Пока что никто не оценил это изображение
+                <h2>Пока что никто не оценил это изображение</h2>
             {% endfor %}
         </div>
 

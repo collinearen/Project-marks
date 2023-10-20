@@ -439,3 +439,17 @@ button.button-mark {
     float: left;
 
 }
+
+.division_desription_image {
+    display: block;
+    max-width: 300px;
+    max-height: 200px;
+    text-align: center;
+    background: #fff;
+    border-color: black;
+    border-width: 3px 4px 3px 5px;
+    border-radius: 95% 4% 92% 5%/4% 95% 6% 95%;
+    transform: rotate(2deg);
+
+
+}
