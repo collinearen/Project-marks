@@ -46,7 +46,11 @@ class UserEditForm(forms.ModelForm):
 
 
 class ProfileEditForm(forms.ModelForm):
+    photo = forms.ImageField(label="",
+                             help_text="Можете выбрать свое фото",
+                             required=False,
+                             )
+
     class Meta:
         model = Profile
         fields = ['photo']
-

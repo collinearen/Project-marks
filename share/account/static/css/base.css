@@ -21,8 +21,6 @@ a {
 
 a:hover {
     display: inline-block;
-
-
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -131,8 +129,6 @@ input, textarea {
     margin: 0 0 10px;
     border-radius: 5%;
     background: #efefef;
-    border: 3px solid #554;
-
     padding: 6px 10px;
     font-size: 14px;
 
@@ -260,13 +256,19 @@ ul.messages li a.close {
 /* images */
 
 .image-preview, .image-detail {
-    max-width: 300px;
+
     float: left;
     margin: 0 20px 20px 0;
+    border-radius: 10%;
+
+    max-width: 500px;
+
+
 }
 
 .image-detail {
     margin-top: 20px;
+
 }
 
 .image-info div {
@@ -294,19 +296,20 @@ a.like, a.follow {
 
 #image-list .image {
     float: left;
-    width: 220px;
-    height: 300px;
+    width: 260px;
+    height: 360px;
     margin: 0 10px 10px 10px;
-    border-top: 8px solid white;
+
     border-radius: 10%;
 
-    background: #EAE0C8;
+    box-shadow: inset 0 0 10px gray;
+
 }
 
 #image-list img {
 
-    width: 220px;
-    height: 220px;
+    width: 260px;
+    height: 280px;
     border-radius: 10%;
 
 }
@@ -314,6 +317,7 @@ a.like, a.follow {
 #image-list .info {
     padding: 10px;
     text-align: center;
+    color: #333333;
 }
 
 #image-list .info a {
@@ -427,7 +431,11 @@ button.button-mark {
     text-align: center;
 }
 
-.default_image{
+.default_image {
     border-radius: 5%;
+}
+
+.image_detail_a {
     float: left;
+
 }

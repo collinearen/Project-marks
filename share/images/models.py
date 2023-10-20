@@ -20,6 +20,7 @@ class Image(models.Model):
                                         related_name='images_liked',
                                         blank=True)
     total_likes = models.PositiveIntegerField(default=0)
+    url_user = models.URLField(max_length=2000, default=url)
 
     class Meta:
         indexes = [

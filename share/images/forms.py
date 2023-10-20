@@ -7,9 +7,14 @@ from .models import Image
 
 
 class ImageCreateForm(forms.ModelForm):
+    title = forms.CharField(label="Название")
+    url_user = forms.URLField(label="Ваша ссылка (по желанию)",
+                              help_text="Это поле не обязательное", required=False)
+    description = forms.Textarea()
+
     class Meta:
         model = Image
-        fields = ['title', 'url', 'description']
+        fields = ['title', 'url', 'url_user', 'description']
         widgets = {
             'url': forms.HiddenInput,
         }
