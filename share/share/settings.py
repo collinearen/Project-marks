@@ -9,7 +9,6 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-import os
 from pathlib import Path
 
 from django.urls import reverse_lazy
@@ -44,6 +43,7 @@ INSTALLED_APPS = [
     'images.apps.ImagesConfig',
     'actions.apps.ActionsConfig',
     'debug_toolbar',
+
 ]
 
 MIDDLEWARE = [
@@ -136,20 +136,11 @@ MEDIA_ROOT = BASE_DIR / 'media'
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'account.authentication.EmailAuthBackend',
-    'social_core.backends.facebook.FacebookOAuth2',
-    'social_core.backends.twitter.TwitterOAuth',
     'social_core.backends.google.GoogleOAuth2',
 ]
 
-SOCIAL_AUTH_FACEBOOK_KEY = ''  # Facebook App ID
-SOCIAL_AUTH_FACEBOOK_SECRET = ''  # Facebook App Secret
-SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
-
-SOCIAL_AUTH_TWITTER_KEY = ''  # Twitter API Key
-SOCIAL_AUTH_TWITTER_SECRET = ''  # Twitter API Secret
-
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = ''  # Google Client ID
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = ''  # Google Client Secret
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = 'AIzaSyCe-mUlP4c_CVtvCAIVZrag0PCpmbCNUf0'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
 
 SOCIAL_AUTH_PIPELINE = [
     'social_core.pipeline.social_auth.social_details',
@@ -162,6 +153,7 @@ SOCIAL_AUTH_PIPELINE = [
     'social_core.pipeline.social_auth.associate_user',
     'social_core.pipeline.social_auth.load_extra_data',
     'social_core.pipeline.user.user_details',
+    'social_core.pipeline.social_auth.associate_by_email',
 ]
 
 ABSOLUTE_URL_OVERRIDES = {
@@ -190,7 +182,6 @@ EMAIL_PORT = 465
 EMAIL_HOST_USER = 'ihecore2@yandex.ru'
 EMAIL_HOST_PASSWORD = 'bdrhimzttcfbgwks'
 EMAIL_USE_SSL = True
-
 
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 SERVER_EMAIL = EMAIL_HOST_USER
