@@ -3,11 +3,13 @@ from django import forms
 from django.core.files.base import ContentFile
 from django.utils.text import slugify
 
+
 from .models import Image
 
 
 class ImageCreateForm(forms.ModelForm):
-    title = forms.CharField(label="Название")
+
+    title = forms.CharField(label="Название", )
     description = forms.Textarea()
     website_url = forms.URLField(label="Ссылка на вебсайт", required=False)
 
@@ -16,7 +18,6 @@ class ImageCreateForm(forms.ModelForm):
         fields = ['title', 'url', 'website_url', 'description']
         widgets = {
             'url': forms.HiddenInput(),
-
         }
 
     def clean_url(self):
@@ -24,7 +25,7 @@ class ImageCreateForm(forms.ModelForm):
         valid_extensions = ['jpg', 'jpeg', 'png', 'webp']
         extension = url.rsplit('.', 1)[1].lower()
         if extension not in valid_extensions:
-            raise forms.ValidationError('Указанный URL-адрес не соответствует допустимым расширениям изображений.')
+            raise forms.ValidationError('Указанный URL-адрес не соответствует допустимым расширениям изображений')
         return url
 
     def save(self, force_insert=False,

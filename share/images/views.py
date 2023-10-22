@@ -37,6 +37,7 @@ def image_create(request):
             cd = form.cleaned_data
             new_image = form.save(commit=False)
 
+
             # assign current user to the item
             new_image.user = request.user
             # Обновляем информацию в модели Profile, что пользователь, добавивший новую фотографию, считается активным
@@ -100,7 +101,7 @@ def image_list(request):
     images_only = request.GET.get('images_only')
 
     # <-- rating -->
-    image_ranking = r.zrange('image_ranking', 0, -1, desc=True)[10:]
+    image_ranking = r.zrange('image_ranking', 0, -1, desc=True)[:10]
     image_ranking_ids = [int(id) for id in image_ranking]
 
     most_viewed = list(Image.objects.filter(id__in=image_ranking_ids))
@@ -149,7 +150,7 @@ def user_images_list(request, user_id):
     cur_user = request.user
     if user_id == cur_user.id:
         images = Image.objects.filter(user=user)
-        paginator = Paginator(images, 8)
+        paginator = Paginator(images, 1000)
         page = request.GET.get('page')
         images_only = request.GET.get('images_only')
         try:
