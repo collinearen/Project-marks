@@ -6,7 +6,7 @@
 {% block content %}
     <h1>{{ image.title }}</h1>
 
-    <a class="image_detail_a" href="{{ image.url_user }}">
+    <a class="image_detail_a" href="{{ image.website_url }}">
         <img src="
 
                 {% if image.image %}{% thumbnail image.image 600x600 %}{% else %}{% static 'def_img/default.png' %}{% endif %}"

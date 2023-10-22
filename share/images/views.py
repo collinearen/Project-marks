@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator, EmptyPage, \
     PageNotAnInteger
+from django.db import transaction
 from django.http import HttpResponse
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
@@ -12,11 +13,10 @@ from django.shortcuts import render, redirect
 from django.views.decorators.http import require_POST
 
 from account.models import Profile
-from actions.utils import create_action, delete_action
+from actions.models import Action
+from actions.utils import create_action
 from .forms import ImageCreateForm
 from .models import Image
-from django.db import transaction
-from actions.models import Action
 
 # соединить с redis
 r = redis.Redis(host=settings.REDIS_HOST, port=settings.REDIS_PORT,
@@ -34,13 +34,11 @@ def image_create(request):
         # form is sent
         form = ImageCreateForm(data=request.POST)
         if form.is_valid():
-            # form data is valid
             cd = form.cleaned_data
-
             new_image = form.save(commit=False)
+
             # assign current user to the item
             new_image.user = request.user
-
             # Обновляем информацию в модели Profile, что пользователь, добавивший новую фотографию, считается активным
             profile = Profile.objects.get_or_create(user=request.user)[0]
             profile.active = True
@@ -52,8 +50,9 @@ def image_create(request):
             # redirect to new created image detail view
             return redirect(new_image.get_absolute_url())
     else:
-        # build form with data provided by the bookmarklet via GET
+
         form = ImageCreateForm(data=request.GET)
+
     return render(request,
                   'images/image/create.html',
                   {'section': 'images',

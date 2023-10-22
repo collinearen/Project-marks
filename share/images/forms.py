@@ -7,15 +7,16 @@ from .models import Image
 
 
 class ImageCreateForm(forms.ModelForm):
-    title = forms.CharField(label="Название", widget=forms.TextInput(attrs={'placeholder': 'Enter your name'}))
+    title = forms.CharField(label="Название")
     description = forms.Textarea()
-    url_user = forms.URLField(label="Ссылка на вебсайт", required=False)
+    website_url = forms.URLField(label="Ссылка на вебсайт", required=False)
 
     class Meta:
         model = Image
-        fields = ['title', 'url', 'url_user', 'description']
+        fields = ['title', 'url', 'website_url', 'description']
         widgets = {
             'url': forms.HiddenInput(),
+
         }
 
     def clean_url(self):
