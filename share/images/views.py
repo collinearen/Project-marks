@@ -36,8 +36,6 @@ def image_create(request):
         if form.is_valid():
             cd = form.cleaned_data
             new_image = form.save(commit=False)
-
-
             # assign current user to the item
             new_image.user = request.user
             # Обновляем информацию в модели Profile, что пользователь, добавивший новую фотографию, считается активным
