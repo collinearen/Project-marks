@@ -3,21 +3,21 @@ from django import forms
 from django.core.files.base import ContentFile
 from django.utils.text import slugify
 
-
 from .models import Image
 
 
 class ImageCreateForm(forms.ModelForm):
-
     title = forms.CharField(label="Название", )
     description = forms.Textarea()
-    website_url = forms.URLField(label="Ссылка на вебсайт", required=False)
+    leave_url = forms.BooleanField(required=False, label="Оставить ссылку на вебсайт?")
 
     class Meta:
         model = Image
-        fields = ['title', 'url', 'website_url', 'description']
+        fields = ['title', 'leave_url', 'url', 'website_url', 'description']
         widgets = {
             'url': forms.HiddenInput(),
+            'website_url': forms.HiddenInput(),
+
         }
 
     def clean_url(self):
@@ -32,7 +32,10 @@ class ImageCreateForm(forms.ModelForm):
              force_update=False,
              commit=True):
         image = super().save(commit=False)
+
         image_url = self.cleaned_data['url']
+        if not self.cleaned_data['leave_url']:
+            image.website_url = ""
         name = slugify(image.title)
         extension = image_url.rsplit('.', 1)[1].lower()
         image_name = f'f{name}.{extension}'
