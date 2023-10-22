@@ -7,18 +7,15 @@ from .models import Image
 
 
 class ImageCreateForm(forms.ModelForm):
-    title = forms.CharField(label="Название")
-    url_user = forms.URLField(label="Ваша ссылка",
-                              help_text="Это поле не обязательное", required=False)
+    title = forms.CharField(label="Название", widget=forms.TextInput(attrs={'placeholder': 'Enter your name'}))
     description = forms.Textarea()
+    url_user = forms.URLField(label="Ссылка на вебсайт", required=False)
 
     class Meta:
         model = Image
         fields = ['title', 'url', 'url_user', 'description']
         widgets = {
             'url': forms.HiddenInput(),
-            'title': forms.TextInput(attrs={'placeholder': f'Hello'})
-
         }
 
     def clean_url(self):
@@ -26,7 +23,7 @@ class ImageCreateForm(forms.ModelForm):
         valid_extensions = ['jpg', 'jpeg', 'png', 'webp']
         extension = url.rsplit('.', 1)[1].lower()
         if extension not in valid_extensions:
-            raise forms.ValidationError('The given URL does not match valid image extensions.')
+            raise forms.ValidationError('Указанный URL-адрес не соответствует допустимым расширениям изображений.')
         return url
 
     def save(self, force_insert=False,

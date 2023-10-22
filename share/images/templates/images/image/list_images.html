@@ -1,8 +1,5 @@
 {% load thumbnail %}
 
-
-
-
 {% for image in images %}
 
     <div class="image">
@@ -15,7 +12,7 @@
         </a>
         <div class="info">
             <a href="{{ image.get_absolute_url }}" class="title">
-                {{ image.title }}
+                {{ image.title_list }}
             </a>
         </div>
     </div>

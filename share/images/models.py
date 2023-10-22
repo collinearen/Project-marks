@@ -32,6 +32,9 @@ class Image(models.Model):
     def __str__(self):
         return self.title
 
+    def title_list(self):
+        return f'{self.title[:40]}...'
+
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(unidecode(self.title))
