@@ -6,12 +6,20 @@
 {% block content %}
     <h1>{{ image.title }}</h1>
 
-    <a class="image_detail_a" href="{{ image.website_url }}">
-        <img src="
+    {% if image.website_url %}
+        <a class="image_detail_a" href="{{ image.website_url }}">
+            <img src="
+{% if image.image %}{% thumbnail image.image 600x600 %}{% else %}{% static 'def_img/default.png' %}{% endif %}"
+                 class="image-detail">
+        </a>
+    {% else %}
+        <a class="image_detail_a">
+            <img src="
+                    {% if image.image %}{% thumbnail image.image 600x600 %}{% else %}{% static 'def_img/default.png' %}{% endif %}"
+                 class="image-detail">
+        </a>
+    {% endif %}
 
-                {% if image.image %}{% thumbnail image.image 600x600 %}{% else %}{% static 'def_img/default.png' %}{% endif %}"
-             class="image-detail">
-    </a>
 
     {% with total_likes=image.users_like.count users_like=image.users_like.all %}
         <div class="image-info">
@@ -33,25 +41,25 @@
                 </a>
             </div>
 
-              <p class="like-text">Описание</p>
-         <div class="division_desription_image">
-            {{ image.description|linebreaks }}
-        </div>
+            <p class="like-text">Описание</p>
+            <div class="division_desription_image">
+                {{ image.description|linebreaks }}
+            </div>
 
         </div>
 
         {% if image.user_id == request.user.id %}
-            <a  href="{% url "images:delete" image.id %}" >Удалить картинку</a>
+            <a href="{% url "images:delete" image.id %}">Удалить картинку</a>
         {% endif %}
 
         <div class="image-likes">
 
+            <h2>Пользователям понравилось...</h2>
             {% for user in users_like %}
-                <h2>Пользователям понравилось...</h2>
+
                 <div>
                     {% if user.profile.photo %}
                         <img src="
-
                                 {% if user.profile.photo.url %}{{ user.profile.photo.url }} {% else %}{% static 'def_img/default.png' %}{% endif %}">
                     {% endif %}
                     <p>{{ user.first_name }}</p>

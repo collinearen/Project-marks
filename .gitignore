@@ -4,3 +4,11 @@
 /share/db.sqlite3
 /share/settings.py
 /share/media/
+/.idea/dataSources.xml
+/identifier.sqlite
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/inspectionProfiles/profiles_settings.xml
+/.idea/inspectionProfiles/Project_Default.xml
+/.idea/ShareIt.iml
+/.idea/vcs.xml

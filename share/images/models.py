@@ -33,7 +33,7 @@ class Image(models.Model):
         return self.title
 
     def title_list(self):
-        return f'{self.title[:40]}...'
+        return f'{self.title[:40]}...' if len(self.title) > 40 else self.title
 
     def save(self, *args, **kwargs):
         if not self.slug:

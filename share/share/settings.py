@@ -82,8 +82,12 @@ WSGI_APPLICATION = 'share.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'shareit',
+        'USER': 'postgres',
+        'PASSWORD': '0000',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
 
@@ -186,3 +190,7 @@ EMAIL_USE_SSL = True
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 SERVER_EMAIL = EMAIL_HOST_USER
 EMAIL_ADMIN = EMAIL_HOST_USER
+
+
+# <--- RUNSERVER --->
+# python manage.py runserver_plus --cert-file cert.crt
