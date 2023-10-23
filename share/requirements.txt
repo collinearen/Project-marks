@@ -30,5 +30,4 @@ typing_extensions==4.8.0
 urllib3==2.0.6
 webencodings==0.5.1
 Werkzeug==2.2.2
-
 Django~=4.2.6
