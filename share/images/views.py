@@ -3,6 +3,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
 from django.core.paginator import Paginator, EmptyPage, \
     PageNotAnInteger
 from django.db import transaction
@@ -133,16 +134,6 @@ def image_list(request):
 
 
 @login_required
-def image_ranking(request):
-    # get image ranking dictionary
-
-    return render(request,
-                  'images/image/ranking.html',
-                  {'section': 'images',
-                   'most_viewed': most_viewed})
-
-
-@login_required
 def user_images_list(request, user_id):
     user = User.objects.get(id=user_id)
     cur_user = request.user
@@ -193,3 +184,20 @@ def delete(request, id_image):
     except Exception as e:
         print(e)
     return render(request, 'images/image/delete_success.html')
+
+
+@login_required
+def download_image(request, id_image):
+    try:
+        image = Image.objects.get(id=id_image)
+
+        content_type = 'image/jpeg'
+
+        # Создать ответ файла
+        response = HttpResponse(image.image, content_type=content_type)
+        response['Content-Disposition'] = f'attachment; filename="{image.image}"'
+
+        return response
+
+    except ObjectDoesNotExist:
+        return HttpResponse("Фото не найдено!", status=404)

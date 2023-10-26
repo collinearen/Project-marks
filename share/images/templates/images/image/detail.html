@@ -9,7 +9,7 @@
     {% if image.website_url %}
         <a class="image_detail_a" href="{{ image.website_url }}">
             <img src="
-{% if image.image %}{% thumbnail image.image 600x600 %}{% else %}{% static 'def_img/default.png' %}{% endif %}"
+        {% if image.image %}{% thumbnail image.image 600x600 %}{% else %}{% static 'def_img/default.png' %}{% endif %}"
                  class="image-detail">
         </a>
     {% else %}
@@ -52,8 +52,9 @@
             <a href="{% url "images:delete" image.id %}">Удалить картинку</a>
         {% endif %}
 
-        <div class="image-likes">
+        <a href="{% url 'images:download_image' image.id %}" download>Скачать картинку</a>
 
+        <div class="image-likes">
             <h2>Пользователям понравилось...</h2>
             {% for user in users_like %}
 

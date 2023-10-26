@@ -301,10 +301,8 @@ a.like, a.follow {
     width: 260px;
     height: 360px;
     margin: 0 20px 50px 10px;
-
     border-radius: 10%;
-
-    box-shadow: inset 0 0 10px gray;
+    box-shadow: inset 0 0 10px black;
 
 }
 
@@ -313,13 +311,13 @@ a.like, a.follow {
     width: 260px;
     height: 280px;
     border-radius: 10%;
-
 }
 
 #image-list .info {
     padding: 10px;
     text-align: center;
     color: #333333;
+
 }
 
 #image-list .info a {
