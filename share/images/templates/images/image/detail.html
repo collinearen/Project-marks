@@ -13,6 +13,8 @@
                  class="image-detail">
         </a>
     {% else %}
+
+
         <a class="image_detail_a">
             <img src="
                     {% if image.image %}{% thumbnail image.image 600x600 %}{% else %}{% static 'def_img/default.png' %}{% endif %}"

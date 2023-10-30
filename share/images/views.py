@@ -32,7 +32,6 @@ r = redis.Redis(host=settings.REDIS_HOST,
 @login_required
 def image_create(request):
     if request.method == 'POST':
-        # form is sent
         form = ImageCreateForm(data=request.POST)
         if form.is_valid():
             cd = form.cleaned_data
@@ -47,7 +46,6 @@ def image_create(request):
             new_image.save()
             create_action(request.user, 'поделился', new_image)
             messages.success(request, 'Изображение успешно сохранено!')
-            # redirect to new created image detail view
             return redirect(new_image.get_absolute_url())
     else:
 

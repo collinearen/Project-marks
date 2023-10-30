@@ -2,11 +2,11 @@
 
 {% for image in images %}
 
-    <div class="image">
-        <a href="{{ image.get_absolute_url }}">
+    <div class="image" >
+        <a  href="{{ image.get_absolute_url }}">
             {% thumbnail image.image 400x400 crop="smart" as im %}
             <a href="{{ image.get_absolute_url }}">
-                <img src="{{ im.url }}">
+                <img loading="lazy" src="{{ im.url }}">
             </a>
         </a>
         <div class="info">

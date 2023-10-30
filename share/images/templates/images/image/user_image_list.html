@@ -7,9 +7,15 @@
     <div id="image-list">
         {% if images %}
             {% include "images/image/list_images.html" %}
-        {% else %}Сохраненных закладок пока что нет
-
+            </div>
+        {% else %}
+            <div class="container">
+                <h2 class="title-word">
+                    <span class="title-word title-word-1">Сохраненных</span>
+                    <span class="title-word title-word-2">закладок</span>
+                    <span class="title-word title-word-3">пока что</span>
+                    <span class="title-word title-word-4">нет</span>
+                </h2>
             </div>
         {% endif %}
 {% endblock %}
-

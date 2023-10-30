@@ -1,5 +1,5 @@
 /venv/
-/share/cert.key
+/cert.key
 /share/cert.crt
 /share/db.sqlite3
 /share/settings.py
@@ -7,8 +7,9 @@
 /.idea/dataSources.xml
 /identifier.sqlite
 /.idea/misc.xml
-/.idea/modules.xml
 /.idea/inspectionProfiles/profiles_settings.xml
+/.idea/modules.xml
 /.idea/inspectionProfiles/Project_Default.xml
 /.idea/ShareIt.iml
 /.idea/vcs.xml
+/share/.env
