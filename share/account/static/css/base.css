@@ -1,5 +1,6 @@
 @import url(//fonts.googleapis.com/css?family=Jura);
 @import url("https://fonts.googleapis.com/css?family=Signika+Negative:300,400&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;800&display=swap');
 
 body {
     margin: 0;
@@ -12,17 +13,7 @@ p {
 
 }
 
-a {
 
-    color: darkblue;
-    text-decoration: none;
-
-}
-
-
-a:hover {
-    display: inline-block;
-}
 
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Muli', sans-serif;
@@ -82,16 +73,18 @@ ol {
 #header ul.menu li.selected a, #header ul.menu li.selected a:hover {
     color: white;
     font-weight: bold;
+
 }
 
 #header a {
     color: #f3f7cc;
 
+
 }
 
 #header a:hover {
-    color: #fff;
-
+    color: white;
+    text-decoration: none
 }
 
 #header .user {
@@ -101,8 +94,6 @@ ol {
 
 #content {
     padding: 30px 100px;
-
-
 }
 
 /* forms */
@@ -129,7 +120,7 @@ input, textarea {
     clear: both;
     float: left;
     margin: 0 0 10px;
-    border-radius: 5%;
+    border-radius: 0.7rem;
     background: #efefef;
     padding: 6px 10px;
     font-size: 14px;
@@ -138,7 +129,7 @@ input, textarea {
 
 input[type=submit], a.button {
     font-family: Jura sans-serif;
-    background: dodgerblue;
+    background: #336699;
     color: white;
     padding: 10px 20px;
     font-size: 18px;
@@ -262,8 +253,7 @@ ul.messages li a.close {
 
     float: left;
     margin: 0 20px 20px 0;
-    border-radius: 10%;
-
+    border-radius: 2rem;
     max-width: 500px;
 
 
@@ -299,6 +289,7 @@ a.like, a.follow {
     grid-row: initial;
 
 }
+
 
 #image-list .image {
     float: left;
@@ -410,7 +401,7 @@ img.user_edit_image {
 }
 
 .like-text {
-    font-family: "Roboto Light", sans-serif;
+    font-family: "Signika Negative", sans-serif;
     color: dodgerblue;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1)
 }
@@ -523,3 +514,192 @@ button.button-mark {
     font-size: 4vw;
     text-transform: uppercase;
 }
+
+
+/* demo setup */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box
+}
+
+blockquote {
+    max-width: 25rem;
+    margin-inline: auto
+}
+
+/* blockquote card colors */
+blockquote.q-card-color-1 {
+    --accent-color: rgb(32 32 54);
+    --bg-color: rgb(30 145 254);
+    --dot-color: rgb(255 255 255 / .35);
+    --text-color: rgb(243 243 243);
+    --text-color-author: rgb(243 243 243);
+}
+
+blockquote.q-card-color-2 {
+    --accent-color: rgb(243 243 243);
+    --bg-color: rgb(33 29 30);
+    --dot-color: rgb(255 255 255 / .125);
+    --text-color: rgb(243 243 243);
+    --text-color-author: blue;
+
+
+}
+
+blockquote.q-card-color-3 {
+    --accent-color: rgb(30 145 254);
+    --bg-color: rgb(32 32 54);
+    --dot-color: rgb(255 255 255 / .125);
+    --text-color: rgb(243 243 243);
+    --text-color-author: rgb(243 243 243);
+}
+
+/* blockquote card setup*/
+blockquote.q-card {
+    --padding: 1rem;
+    padding: var(--padding);
+
+    color: var(--text-color, black);
+    font-weight: 600;
+    background-color: var(--bg-color, white);
+    display: grid;
+    gap: 1rem;
+    background-image: radial-gradient(circle, var(--dot-color, rgb(0 0 0 / .125)) calc(25% - 1px), transparent 25%);
+    background-size: 0.5rem 0.5rem;
+    border-radius: 2rem;
+    box-shadow: 0.7rem 0.6rem 2rem rgb(0 0 0 / .5)
+
+}
+
+blockquote.q-card::before {
+    --qHeight: 4rem;
+    content: "";
+    margin-left: calc(var(--padding) * -1);
+    margin-top: calc(var(--padding) * -1);
+    height: var(--qHeight);
+    width: calc(var(--qHeight) * 1.1);
+    background-image: radial-gradient(
+            circle at bottom right,
+            transparent calc(var(--qHeight) / 4 - 1px),
+            var(--accent-color, black) calc(var(--qHeight) / 4) calc(var(--qHeight) / 2),
+            transparent calc(var(--qHeight) / 2 + 1px)
+    ),
+    linear-gradient(var(--accent-color, black), var(--accent-color, black));
+    background-size: calc(var(--qHeight) / 2) calc(var(--qHeight) / 2);
+    background-position: top left, bottom left;
+    background-repeat: space no-repeat
+}
+
+blockquote.q-card > .author {
+    color: var(--text-color-author, white);
+    background-color: var(--accent-color, black);
+
+    justify-self: end;
+    font-size: 1.9em;
+
+    padding: 0.5em 1em;
+    border-radius: 0.25rem;
+}
+
+blockquote.q-card > .author::before {
+    margin-right: auto;
+
+}
+
+
+button {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    outline: none;
+    border: 0;
+    vertical-align: middle;
+    text-decoration: none;
+    background: transparent;
+    padding: 0;
+    font-size: inherit;
+    font-family: inherit;
+
+    &.learn-more {
+        width: 12rem;
+        height: auto;
+
+        .circle {
+
+            position: relative;
+            display: block;
+            margin: 0;
+            width: 3rem;
+            height: 3rem;
+            background:  black;
+            border-radius: 1.625rem;
+
+            .icon {
+                @include transition(all, 1s, cubic-bezier(0.65,0,.076,1));
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                margin: auto;
+                background: white;
+
+                &.arrow {
+                    @include transition(all, 1s, cubic-bezier(0.65,0,.076,1));
+                    left: 0.625rem;
+                    width: 1.125rem;
+                    height: 0.125rem;
+                    background: none;
+
+                    &::before {
+                        position: absolute;
+                        content: '';
+                        top: -0.25rem;
+                        right: 0.0625rem;
+                        width: 0.625rem;
+                        height: 0.625rem;
+                        border-top: 0.125rem solid #fff;
+                        border-right: 0.125rem solid #fff;
+                        transform: rotate(45deg);
+                    }
+                }
+            }
+        }
+
+        .button-text {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            padding: 0.75rem 0;
+            margin: 0 0 0 1.85rem;
+            color: black;
+            font-weight: 700;
+            line-height: 1.6;
+            text-align: center;
+            text-transform: uppercase;
+        }
+    }
+
+    &:hover {
+        .circle {
+            width: 100%;
+
+            .icon {
+                &.arrow {
+                    background: white;
+                    transform: translate(1rem, 0);
+                }
+            }
+        }
+
+        .button-text {
+            color: white;
+        }
+    }
+}
+
+
+
+
+
