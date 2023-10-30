@@ -23,11 +23,6 @@ from .models import Image
 r = redis.Redis(host=settings.REDIS_HOST, port=settings.REDIS_PORT,
                 db=settings.REDIS_DB)
 
-# connect to redis
-r = redis.Redis(host=settings.REDIS_HOST,
-                port=settings.REDIS_PORT,
-                db=settings.REDIS_DB)
-
 
 @login_required
 def image_create(request):
@@ -36,7 +31,6 @@ def image_create(request):
         if form.is_valid():
             cd = form.cleaned_data
             new_image = form.save(commit=False)
-            # assign current user to the item
             new_image.user = request.user
             # Обновляем информацию в модели Profile, что пользователь, добавивший новую фотографию, считается активным
             profile = Profile.objects.get_or_create(user=request.user)[0]
@@ -107,14 +101,14 @@ def image_list(request):
     try:
         images = paginator.page(page)
     except PageNotAnInteger:
-        # If page is not an integer deliver the first page
+        # Если страница не является целым числом, то использовать первую страницу
         images = paginator.page(1)
     except EmptyPage:
         if images_only:
-            # If AJAX request and page out of range
-            # return an empty page
+            # Если запрос AJAX и страница выходят за пределы диапазона
+            # вернуть пустую страницу
             return HttpResponse('')
-        # If page out of range return last page of results
+        # Если страница выходит за пределы диапазона, вернуть последнюю страницу результатов
         images = paginator.page(paginator.num_pages)
     if images_only:
         return render(request,
@@ -143,14 +137,11 @@ def user_images_list(request, user_id):
         try:
             images = paginator.page(page)
         except PageNotAnInteger:
-            # If page is not an integer deliver the first page
             images = paginator.page(1)
+
         except EmptyPage:
             if images_only:
-                # If AJAX request and page out of range
-                # return an empty page
                 return HttpResponse('')
-            # If page out of range return last page of results
             images = paginator.page(paginator.num_pages)
         if images_only:
             return render(request,
