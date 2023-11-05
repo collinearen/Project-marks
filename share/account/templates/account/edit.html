@@ -6,18 +6,13 @@
     <h1 class="like-text">Редактирование профиля</h1>
 
 
-    {% if user.profile.photo %}
-        <a href="{{ user.get_absolute_url }}">
-            <img class="user_edit_image"
-                 src="
-                     {% thumbnail user.profile.photo 200x200 %}">
-        </a>
-    {% else %}
-        <svg class="default_image" width="200" height="200">
-            <image href="{% static 'def_img/default.png' %}" height="100%" width="100%"
-                   preserveAspectRatio="xMidYMid slice"/>
-        </svg>
-    {% endif %}
+    <a id="people-list" href="{{ user.get_absolute_url }}">
+        <img src="
+
+                {% if user.profile.photo %}{% thumbnail user.profile.photo 400x400 %}{% else %}{% static 'def_img/default.png' %}{% endif %}">
+    </a>
+
+
 
     <form method="post" enctype="multipart/form-data">
         {{ user_form.as_p }}
