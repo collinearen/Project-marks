@@ -1,6 +1,6 @@
 {% load thumbnail %}
 {% load static %}
-<h1>{{ image.title }} - Личная закладка</h1>
+<h1>{{ image.title }} — Личная закладка</h1>
 {% if image.website_url %}
     <a class="image_detail_a" href="{{ image.website_url }}">
         <img src="
@@ -17,7 +17,9 @@
 {% endif %}
 
 <blockquote class="q-card q-card-color-2">
-    <div class="content"> {% if image.description %}{{ image.description|linebreaks }}{% else %}Описания нет {% endif %}
+    <div class="content">
+        {% if image.description %}{{ image.description|linebreaks }}{% else %}Описания нет {% endif %}
+        <div class='author' style="font-size: 23px">Личное</div>
 </blockquote>
 {% if image.user_id == request.user.id %}
     <a href="{% url "images:delete" image.id %}">Удалить картинку</a>

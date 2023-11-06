@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 
-{% block title %}Images bookmarked{% endblock %}
+{% block title %}My Images{% endblock %}
 
 {% block content %}
-    <h1 class="like-text">Мои личные закладки</h1>
+    <h1 class="like-text">Мои закладки</h1>
     <div id="image-list">
         {% if images %}
             {% include "images/image/list_user_images.html" %}
