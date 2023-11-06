@@ -187,5 +187,15 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 SERVER_EMAIL = EMAIL_HOST_USER
 EMAIL_ADMIN = EMAIL_HOST_USER
 
+
+# <---  CELERY  --->
+CELERY_BROKER_URL = 'redis://127.0.0.1:6379'
+CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379'
+
+
+
+
 # <--- RUNSERVER --->
 # python manage.py runserver_plus --cert-file cert.crt
+
+
