@@ -29,16 +29,16 @@ def image_create(request):
     if request.method == 'POST':
         form = ImageCreateForm(data=request.POST)
         if form.is_valid():
-            cd = form.cleaned_data
+
             new_image = form.save(commit=False)
             new_image.user = request.user
             # Обновляем информацию в модели Profile, что пользователь, добавивший новую фотографию, считается активным
             profile = Profile.objects.get_or_create(user=request.user)[0]
             profile.active = True
             profile.save()
-
             new_image.save()
-            create_action(request.user, 'поделился', new_image)
+            if form.cleaned_data['is_private'] == True:
+                create_action(request.user, 'поделился', new_image)
             messages.success(request, 'Изображение успешно сохранено!')
             return redirect(new_image.get_absolute_url())
     else:
@@ -95,7 +95,7 @@ def image_list(request):
     image_ranking = r.zrange('image_ranking', 0, -1, desc=True)[:10]
     image_ranking_ids = [int(id) for id in image_ranking]
 
-    most_viewed = list(Image.objects.filter(id__in=image_ranking_ids))
+    most_viewed = list(Image.objects.filter(id__in=image_ranking_ids, private=False))
     most_viewed.sort(key=lambda x: image_ranking_ids.index(x.id))
 
     try:
@@ -112,7 +112,7 @@ def image_list(request):
         images = paginator.page(paginator.num_pages)
     if images_only:
         return render(request,
-                      'images/image/list_images.html',
+                      'images/image/list_all_images.html',
                       {'section': 'images',
                        'images': images,
                        'most_viewed': most_viewed

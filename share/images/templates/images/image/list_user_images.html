@@ -1,0 +1,22 @@
+{% load thumbnail %}
+{% load static cache %}
+
+
+
+{% for image in images %}
+    <div class="image" >
+        <a  href="{{ image.get_absolute_url }}">
+            {% thumbnail image.image 400x400 crop="smart" as im %}
+            <a href="{{ image.get_absolute_url }}">
+                <img loading="lazy" src="{{ im.url }}">
+            </a>
+        </a>
+        <div class="info">
+            <a href="{{ image.get_absolute_url }}" class="title">
+                {{ image.title_list }}
+            </a>
+        </div>
+    </div>
+
+{% endfor %}
+

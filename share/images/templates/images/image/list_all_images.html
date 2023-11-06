@@ -4,8 +4,7 @@
 
 
 {% for image in images %}
-
-
+    {% if image.private is False %}
     <div class="image" >
         <a  href="{{ image.get_absolute_url }}">
             {% thumbnail image.image 400x400 crop="smart" as im %}
@@ -19,6 +18,7 @@
             </a>
         </div>
     </div>
+    {% endif %}
 
 {% endfor %}
 

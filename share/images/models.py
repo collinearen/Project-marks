@@ -21,6 +21,7 @@ class Image(models.Model):
                                         blank=True)
     total_likes = models.PositiveIntegerField(default=0)
     website_url = models.URLField(max_length=2000, default=url)
+    private = models.BooleanField(default=True)
 
     class Meta:
         indexes = [

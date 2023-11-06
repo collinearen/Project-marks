@@ -1,0 +1,34 @@
+{% load thumbnail %}
+{% load static %}
+<h1>{{ image.title }} - Личная закладка</h1>
+{% if image.website_url %}
+    <a class="image_detail_a" href="{{ image.website_url }}">
+        <img src="
+        {% if image.image %}{% thumbnail image.image 600x600 %}{% else %}{% static 'def_img/default.png' %}{% endif %}"
+             class="image-detail">
+    </a>
+{% else %}
+    <a class="image_detail_a">
+        <img src="
+                    {% if image.image %}{% thumbnail image.image 600x600 %}{% else %}{% static 'def_img/default.png' %}
+                {% endif %}"
+             class="image-detail">
+    </a>
+{% endif %}
+
+<blockquote class="q-card q-card-color-2">
+    <div class="content"> {% if image.description %}{{ image.description|linebreaks }}{% else %}Описания нет {% endif %}
+</blockquote>
+{% if image.user_id == request.user.id %}
+    <a href="{% url "images:delete" image.id %}">Удалить картинку</a>
+{% endif %}
+
+<div id="container">
+    <button class="learn-more">
+                    <span class="circle" aria-hidden="true">
+                         <span class="icon arrow"></span>
+                        </span>
+        <a class="button-text" href="{% url 'images:download_image' image.id %}" download>Скачать</a>
+    </button>
+</div>
+

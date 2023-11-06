@@ -1,0 +1,86 @@
+{% load thumbnail %}
+{% load static %}
+
+<h1>{{ image.title }}</h1>
+{% if image.website_url %}
+    <a class="image_detail_a" href="{{ image.website_url }}">
+        <img src="
+        {% if image.image %}{% thumbnail image.image 600x600 %}{% else %}{% static 'def_img/default.png' %}{% endif %}"
+             class="image-detail">
+    </a>
+{% else %}
+
+    <a class="image_detail_a">
+        <img src="
+                    {% if image.image %}{% thumbnail image.image 600x600 %}{% else %}{% static 'def_img/default.png' %}
+                {% endif %}"
+             class="image-detail">
+    </a>
+{% endif %}
+
+
+{% with total_likes=image.users_like.count users_like=image.users_like.all %}
+    <div class="image-info">
+        <div>
+        <span class="count">
+          <span class="total">{{ total_likes }}</span>
+          like{{ total_likes|pluralize }}
+        </span>
+            <span class="count">
+          {{ total_views }} view{{ total_views|pluralize }}
+        </span>
+            <a href="" data-id="{{ image.id }}" data-action="{% if request.user in users_like %}un{% endif %}like"
+               class="like button">
+                {% if request.user not in users_like %}
+                    Like
+                {% else %}
+                    Unlike
+                {% endif %}
+            </a>
+        </div>
+
+
+        <blockquote class="q-card q-card-color-2">
+            <div class="content">
+                {% if image.description %}{{ image.description|linebreaks }}{% else %}Описания нет {% endif %}
+                <div class='author' style="font-size: 23px">{{ image.user }}</div>
+
+        </blockquote>
+
+
+
+        {% if image.user_id == request.user.id %}
+            <a href="{% url "images:delete" image.id %}">Удалить картинку</a>
+        {% endif %}
+
+        <div id="container">
+            <button class="learn-more">
+                    <span class="circle" aria-hidden="true">
+                         <span class="icon arrow"></span>
+                        </span>
+                <a class="button-text" href="{% url 'images:download_image' image.id %}" download>Скачать</a>
+            </button>
+        </div>
+
+
+        <div class="image-likes">
+            {% if users_like %}
+                <h2>Пользователям понравилось...</h2>
+                {% for user in users_like %}
+                    <div>
+                        {% if user.profile.photo %}
+                            <img src="
+                             {% if user.profile.photo.url %}{{ user.profile.photo.url }}
+                            {% else %}{% static 'def_img/default.png' %}
+                        {% endif %}">
+                        {% endif %}
+                        <p>{{ user.first_name }}</p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <h2>Пока что никто не оценил это изображение</h2>
+            {% endif %}
+        </div>
+
+
+{% endwith %}

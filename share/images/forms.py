@@ -10,10 +10,11 @@ class ImageCreateForm(forms.ModelForm):
     title = forms.CharField(label="Название", )
     description = forms.Textarea()
     leave_url = forms.BooleanField(required=False, label="Оставить ссылку на вебсайт?")
+    is_private = forms.BooleanField(required=False, label="Выложить для всех")
 
     class Meta:
         model = Image
-        fields = ['title', 'leave_url', 'url', 'website_url', 'description']
+        fields = ['title', 'leave_url', 'is_private', 'url', 'website_url', 'description']
         widgets = {
             'url': forms.HiddenInput(),
             'website_url': forms.HiddenInput(),
@@ -36,6 +37,11 @@ class ImageCreateForm(forms.ModelForm):
         image_url = self.cleaned_data['url']
         if not self.cleaned_data['leave_url']:
             image.website_url = ""
+        if self.cleaned_data['is_private']:
+            image.private = False
+        else:
+            image.private = True
+
         name = slugify(image.title)
         extension = image_url.rsplit('.', 1)[1].lower()
         image_name = f'f{name}.{extension}'

@@ -5,11 +5,12 @@ from .models import Profile
 
 
 class LoginForm(forms.Form):
-    username = forms.CharField()
+    username = forms.CharField(label="Логин")
     password = forms.CharField(widget=forms.PasswordInput)
 
 
 class UserRegistrationForm(forms.ModelForm):
+    username = forms.CharField(label="Логин")
     password = forms.CharField(label='Пароль',
                                widget=forms.PasswordInput)
     password2 = forms.CharField(label='Повторите пароль',
