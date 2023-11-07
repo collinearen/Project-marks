@@ -15,8 +15,9 @@
                 <a href="{% url "dashboard" %}">Моя доска</a>
             </li>
 
-            <li {% if section == "images" %}class="selected"{% endif %}>
-                <a href="{% url 'images:user_images_list' user.id %}">Закладки</a>
+
+            <li {% if section == "all_images" %}class="selected"{% endif %}>
+                <a href="{% url 'images:user_images_list' user.id %}">Мои закладки</a>
             </li>
 
             <li {% if section == "all_images" %}class="selected"{% endif %}>
@@ -31,6 +32,7 @@
             <li {% if section == "edit" %}class="selected"{% endif %}>
                 <a href="{% url 'edit' %}">Профиль</a>
             </li>
+
 
 
             {% if user.is_superuser or user.is_staff %}

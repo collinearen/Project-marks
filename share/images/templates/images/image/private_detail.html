@@ -20,6 +20,7 @@
     <div class="content">
         {% if image.description %}{{ image.description|linebreaks }}{% else %}Описания нет {% endif %}
         <div class='author' style="font-size: 23px">Личное</div>
+    </div>
 </blockquote>
 {% if image.user_id == request.user.id %}
     <a href="{% url "images:delete" image.id %}">Удалить картинку</a>
