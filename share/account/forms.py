@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.models import User
 
 from .models import Profile
@@ -7,6 +8,13 @@ from .models import Profile
 class LoginForm(forms.Form):
     username = forms.CharField(label="Логин")
     password = forms.CharField(widget=forms.PasswordInput)
+
+
+class MyPasswordChangeForm(PasswordChangeForm):
+    email = forms.CharField(widget=forms.TextInput(attrs={'class': 'passInput', 'placeholder': 'Email address', }))
+
+    class Meta:
+        fields = ['email']
 
 
 class UserRegistrationForm(forms.ModelForm):
