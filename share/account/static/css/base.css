@@ -7,14 +7,15 @@ body {
     padding: 0;
     font-family: "Signika Negative", sans-serif;
 }
+
 a {
     text-decoration: none;
 }
+
 p {
     line-height: 1.8;
 
 }
-
 
 
 h1, h2, h3, h4, h5, h6 {
@@ -426,7 +427,7 @@ button.button-mark {
     border: none;
     border-radius: 5px;
     background: linear-gradient(0deg, rgba(63, 94, 251, 1) 0%, rgba(70, 135, 252, 1) 100%);
-    box-shadow: rgba(63, 94, 251, 0.2) 0px 40px 29px 0px;
+    box-shadow: rgba(63, 94, 251, 0.2) 40px 29px;
     will-change: transform;
     transition: all 5s;
     border-bottom: 2px solid rgba(70, 135, 252, 1);
@@ -588,7 +589,7 @@ blockquote.q-card::before {
             var(--accent-color, black) calc(var(--qHeight) / 4) calc(var(--qHeight) / 2),
             transparent calc(var(--qHeight) / 2 + 1px)
     ),
-    linear-gradient(var(--accent-color, black), var(--accent-color, black));
+    linear-gradient(var(--accent-color), var(--accent-color, black));
     background-size: calc(var(--qHeight) / 2) calc(var(--qHeight) / 2);
     background-position: top left, bottom left;
     background-repeat: space no-repeat
@@ -635,7 +636,7 @@ button {
             margin: 0;
             width: 3rem;
             height: 3rem;
-            background:  black;
+            background: black;
             border-radius: 1.625rem;
 
             .icon {
@@ -701,6 +702,7 @@ button {
         }
     }
 }
+
 
 
 
