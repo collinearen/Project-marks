@@ -13,7 +13,6 @@ from .models import Contact
 from .models import Profile
 
 
-
 @login_required
 def dashboard(request):
     # Отображать все действия по умолчанию

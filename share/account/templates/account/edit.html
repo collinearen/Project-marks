@@ -9,6 +9,7 @@
     <a id="people-list" href="{{ user.get_absolute_url }}">
         <img src="
 
+
                 {% if user.profile.photo %}{% thumbnail user.profile.photo 400x400 %}{% else %}{% static 'def_img/default.png' %}{% endif %}">
     </a>
 

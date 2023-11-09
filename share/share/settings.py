@@ -189,5 +189,3 @@ EMAIL_ADMIN = EMAIL_HOST_USER
 
 # <--- RUNSERVER --->
 # python manage.py runserver_plus --cert-file cert.crt
-
-

@@ -4,7 +4,6 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('images', '0004_rename_url_user_image_user_url'),
     ]

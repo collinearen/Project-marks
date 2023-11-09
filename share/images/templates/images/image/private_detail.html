@@ -1,5 +1,6 @@
 {% load thumbnail %}
 {% load static %}
+{% load cache %}
 <h1>{{ image.title }} — Личная закладка</h1>
 {% if image.website_url %}
     <a class="image_detail_a" href="{{ image.website_url }}">
@@ -8,13 +9,16 @@
              class="image-detail">
     </a>
 {% else %}
-    <a class="image_detail_a">
-        <img src="
+    {% cache 3 image.image %}
+        <a class="image_detail_a">
+            <img src="
                     {% if image.image %}{% thumbnail image.image 600x600 %}{% else %}{% static 'def_img/default.png' %}
                 {% endif %}"
-             class="image-detail">
-    </a>
+                 class="image-detail">
+        </a>
+    {% endcache %}
 {% endif %}
+
 
 <blockquote class="q-card q-card-color-2">
     <div class="content">

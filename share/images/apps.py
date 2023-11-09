@@ -6,5 +6,4 @@ class ImagesConfig(AppConfig):
     name = 'images'
 
     def ready(self):
-
-        import images.signals
+        pass
