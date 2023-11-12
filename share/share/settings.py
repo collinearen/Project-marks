@@ -1,14 +1,11 @@
 from pathlib import Path
 
 from django.urls import reverse_lazy
-from dotenv import load_dotenv, find_dotenv
+import secret_settings as env
 
-load_dotenv(find_dotenv())
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-c1bkqgegjaz=lh@wlc29xei-isl$=8nkow6^a09#m7@t%w*-tz'
-# SECURITY WARNING: don't run with debug turned on in production!
+SECRET_KEY = env.key
 DEBUG = True
 
 ALLOWED_HOSTS = ['mysite.com', 'localhost', '127.0.0.1']
@@ -29,7 +26,6 @@ INSTALLED_APPS = [
     'images.apps.ImagesConfig',
     'actions.apps.ActionsConfig',
     'debug_toolbar',
-
 ]
 
 MIDDLEWARE = [
@@ -66,16 +62,7 @@ WSGI_APPLICATION = 'share.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'shareit',
-        'USER': 'postgres',
-        'PASSWORD': '0000',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
-    }
-}
+DATABASES = env.db
 
 CACHES = {
     'default': {
@@ -105,9 +92,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# Internationalization
-# https://docs.djangoproject.com/en/4.1/topics/i18n/
-
 LANGUAGE_CODE = 'ru-ru'
 
 TIME_ZONE = 'UTC'
@@ -116,13 +100,7 @@ USE_I18N = True
 
 USE_TZ = True
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.1/howto/static-files/
-
 STATIC_URL = 'static/'
-
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -139,8 +117,8 @@ AUTHENTICATION_BACKENDS = [
     'social_core.backends.google.GoogleOAuth2',
 ]
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = 'AIzaSyCe-mUlP4c_CVtvCAIVZrag0PCpmbCNUf0'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = env.SOCIAL_AUTH_GOOGLE_OAUTH2_KEY
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = env.SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET
 
 SOCIAL_AUTH_PIPELINE = [
     'social_core.pipeline.social_auth.social_details',
@@ -179,8 +157,8 @@ if DEBUG:
 
 EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 465
-EMAIL_HOST_USER = 'ihecore2@yandex.ru'
-EMAIL_HOST_PASSWORD = 'bdrhimzttcfbgwks'
+EMAIL_HOST_USER = env.email
+EMAIL_HOST_PASSWORD = env.ps
 EMAIL_USE_SSL = True
 
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

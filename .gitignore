@@ -3,4 +3,5 @@
 /share/cert.crt
 /share/media/
 /share/.pytest_cache/
-/.idea/
+/share/share/secret_settings.py/
+.idea/
