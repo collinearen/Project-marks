@@ -7,4 +7,4 @@ briefly about it, what it is:
 
 This project implements an account system with user CRUD, 
 a system of subscriptions, likes and ratings by views.
-
+Ok
