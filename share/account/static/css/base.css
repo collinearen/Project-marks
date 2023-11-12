@@ -568,7 +568,7 @@ blockquote.q-card {
     font-weight: 600;
     background-color: var(--bg-color, white);
     display: grid;
-    gap: 1rem;
+    gap: 4rem;
     background-image: radial-gradient(circle, var(--dot-color, rgb(0 0 0 / .125)) calc(25% - 1px), transparent 25%);
     background-size: 0.5rem 0.5rem;
     border-radius: 2rem;
