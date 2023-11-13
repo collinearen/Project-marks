@@ -29,9 +29,11 @@
                 <a href="{% url "user_list" %}">Пользователи</a>
             </li>
 
+            {% if not user.is_superuser %}
             <li {% if section == "edit" %}class="selected"{% endif %}>
                 <a href="{% url 'edit' %}">Профиль</a>
             </li>
+            {% endif %}
 
 
 

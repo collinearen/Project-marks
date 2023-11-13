@@ -1,11 +1,11 @@
 from pathlib import Path
 
 from django.urls import reverse_lazy
-import secret_settings as env
+import logging
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = env.key
+SECRET_KEY = 'django-insecure-c1bkqgegjaz=lh@wlc29xei-isl$=8nkow6^a09#m7@t%w*-tz'
 DEBUG = True
 
 ALLOWED_HOSTS = ['mysite.com', 'localhost', '127.0.0.1']
@@ -62,7 +62,16 @@ WSGI_APPLICATION = 'share.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = env.db
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'shareit',
+        'USER': 'postgres',
+        'PASSWORD': '0000',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
+    }
+}
 
 CACHES = {
     'default': {
@@ -72,6 +81,35 @@ CACHES = {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
         }
     }
+}
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'main_format': {
+            'format': "{asctime} - {levelname} -{filename} - {message}",
+            'style': "{"
+        },
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'main_format',
+        },
+        'file': {
+            'class': 'logging.FileHandler',
+            'formatter': 'main_format',
+            'filename': "information.log"
+        }
+    },
+    'loggers': {
+        "main": {
+            "handlers": ['console', 'file'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+    },
 }
 
 # Password validation
@@ -117,8 +155,8 @@ AUTHENTICATION_BACKENDS = [
     'social_core.backends.google.GoogleOAuth2',
 ]
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = env.SOCIAL_AUTH_GOOGLE_OAUTH2_KEY
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = env.SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = 'AIzaSyCe-mUlP4c_CVtvCAIVZrag0PCpmbCNUf0'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
 
 SOCIAL_AUTH_PIPELINE = [
     'social_core.pipeline.social_auth.social_details',
@@ -150,15 +188,15 @@ REDIS_DB = 0
 if DEBUG:
     import mimetypes
 
-    mimetypes.add_type('application/javascript', '.js', True)
-    mimetypes.add_type('text/css', '.css', True)
+mimetypes.add_type('application/javascript', '.js', True)
+mimetypes.add_type('text/css', '.css', True)
 
 # <-- EMAIL YANDEX-->
 
 EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 465
-EMAIL_HOST_USER = env.email
-EMAIL_HOST_PASSWORD = env.ps
+EMAIL_HOST_USER = "ihecore2@yandex.ru"
+EMAIL_HOST_PASSWORD = 'bdrhimzttcfbgwks'
 EMAIL_USE_SSL = True
 
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

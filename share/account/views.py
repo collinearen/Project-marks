@@ -1,3 +1,5 @@
+import logging
+
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -12,10 +14,13 @@ from .forms import UserRegistrationForm, UserEditForm, ProfileEditForm
 from .models import Contact
 from .models import Profile
 
+logger = logging.getLogger("main")
+
 
 @login_required
 def dashboard(request):
     # Отображать все действия по умолчанию
+    logger.info("Переход на страницу dashboard")
     actions = Action.objects.exclude(user=request.user)
     following_ids = request.user.following.values_list('id',
                                                        flat=True)
