@@ -1,3 +1,5 @@
+import logging
+
 import redis
 from django.conf import settings
 from django.contrib import messages
@@ -19,13 +21,20 @@ from actions.utils import create_action
 from .forms import ImageCreateForm
 from .models import Image
 
-# соединить с redis
+# соединить с redis (запустить redis в терминале -> redis-cli
+# Если нужно снести redis записи
+# > FLUSHDB - очищает текущую активную базу данных
+# > FLUSHALL - очищает все существующие базы данных
+
 r = redis.Redis(host=settings.REDIS_HOST, port=settings.REDIS_PORT,
                 db=settings.REDIS_DB)
+
+logger = logging.getLogger("main")
 
 
 @login_required
 def image_create(request):
+    logger.info("image create page")
     if request.method == 'POST':
         form = ImageCreateForm(data=request.POST)
         if form.is_valid():
@@ -40,6 +49,7 @@ def image_create(request):
             if form.cleaned_data['is_private'] == True:
                 create_action(request.user, 'поделился', new_image)
             messages.success(request, 'Изображение успешно сохранено!')
+            logger.info("image create!")
             return redirect(new_image.get_absolute_url())
     else:
 
@@ -138,7 +148,6 @@ def user_images_list(request, user_id):
             images = paginator.page(page)
         except PageNotAnInteger:
             images = paginator.page(1)
-
         except EmptyPage:
             if images_only:
                 return HttpResponse('')
@@ -165,12 +174,14 @@ def delete(request, id_image):
     Здесь мы получаем image_id картинки, которую пользователь хочет удалить,
      и через этот image_id мы удаляем ее в таблице Image и все записи в Actions, связанные с этой картиной
     '''
+    logger.info("image delete page")
     try:
         with transaction.atomic():
             image = Image.objects.get(id=id_image)
             image.delete()
             Action.objects.filter(target_id=id_image).delete()
     except Exception as e:
+        logger.error(e)
         print(e)
     return render(request, 'images/image/delete_success.html')
 
@@ -179,14 +190,14 @@ def delete(request, id_image):
 def download_image(request, id_image):
     try:
         image = Image.objects.get(id=id_image)
-
         content_type = 'image/jpeg'
-
         # Создать ответ файла
         response = HttpResponse(image.image, content_type=content_type)
         response['Content-Disposition'] = f'attachment; filename="{image.image}"'
+        logger.info("download page")
 
         return response
 
     except ObjectDoesNotExist:
+        logger.error("not found image!")
         return HttpResponse("Фото не найдено!", status=404)

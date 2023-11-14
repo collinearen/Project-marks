@@ -20,7 +20,7 @@ logger = logging.getLogger("main")
 @login_required
 def dashboard(request):
     # Отображать все действия по умолчанию
-    logger.info("Переход на страницу dashboard")
+    logger.info("Dashboard page")
     actions = Action.objects.exclude(user=request.user)
     following_ids = request.user.following.values_list('id',
                                                        flat=True)
@@ -36,6 +36,7 @@ def dashboard(request):
 
 def register(request):
     if request.method == 'POST':
+
         user_form = UserRegistrationForm(request.POST)
         if user_form.is_valid():
             # Create a new user object but avoid saving it yet
@@ -48,6 +49,7 @@ def register(request):
             # Create the user profile
             Profile.objects.create(user=new_user)
             create_action(new_user, 'создал аккаунт!')
+            logger.info("create user")
             return render(request,
                           'account/register_done.html',
                           {'new_user': new_user})
@@ -90,6 +92,7 @@ def user_list(request):
     active_user_ids = list(user_ids)
     # И затем использовать filter
     users = User.objects.filter(id__in=active_user_ids)
+    logger.info("user list page")
 
     return render(request,
                   'account/user/list.html',
@@ -99,6 +102,7 @@ def user_list(request):
 
 @login_required
 def user_detail(request, username):
+    logger.info("user detail page")
     user = get_object_or_404(User,
                              username=username,
                              is_active=True)

@@ -5,4 +5,4 @@
 /share/.pytest_cache/
 /share/share/secret_settings.py/
 .idea/
-/share/information.log/
+!/share/information.log

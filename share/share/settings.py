@@ -1,7 +1,10 @@
 from pathlib import Path
 
 from django.urls import reverse_lazy
-import logging
+
+from pythonjsonlogger.jsonlogger import JsonFormatter
+
+from account.logging_formatters import CustomJsonFormatter
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -88,18 +91,24 @@ LOGGING = {
     'disable_existing_loggers': False,
     'formatters': {
         'main_format': {
-            'format': "{asctime} - {levelname} -{filename} - {message}",
+            'format': "{asctime}    {levelname}    {filename}    {message}",
             'style': "{"
         },
+        'json_formatter': {
+            '()': CustomJsonFormatter,
+        }
     },
     'handlers': {
         'console': {
             'class': 'logging.StreamHandler',
+            # На консоль я оставлю main formatter, так как было изначально в Django
             'formatter': 'main_format',
         },
+
         'file': {
             'class': 'logging.FileHandler',
-            'formatter': 'main_format',
+            'formatter': 'json_formatter',
+            # А на запись в файл я поставлю json formatter
             'filename': "information.log"
         }
     },
