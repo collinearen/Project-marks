@@ -1,14 +1,15 @@
+import os
 from pathlib import Path
 
 from django.urls import reverse_lazy
-
-from pythonjsonlogger.jsonlogger import JsonFormatter
+from dotenv import load_dotenv
 
 from account.logging_formatters import CustomJsonFormatter
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+load_dotenv()
 
-SECRET_KEY = 'django-insecure-c1bkqgegjaz=lh@wlc29xei-isl$=8nkow6^a09#m7@t%w*-tz'
+BASE_DIR = Path(__file__).resolve().parent.parent
+SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = True
 
 ALLOWED_HOSTS = ['mysite.com', 'localhost', '127.0.0.1']
@@ -64,6 +65,7 @@ WSGI_APPLICATION = 'share.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
+
 
 DATABASES = {
     'default': {
@@ -164,8 +166,8 @@ AUTHENTICATION_BACKENDS = [
     'social_core.backends.google.GoogleOAuth2',
 ]
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = 'AIzaSyCe-mUlP4c_CVtvCAIVZrag0PCpmbCNUf0'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.environ.get("SOCIAL_AUTH_GOOGLE_OAUTH2_KEY")
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.environ.get("SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET")
 
 SOCIAL_AUTH_PIPELINE = [
     'social_core.pipeline.social_auth.social_details',
@@ -204,8 +206,8 @@ mimetypes.add_type('text/css', '.css', True)
 
 EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 465
-EMAIL_HOST_USER = "ihecore2@yandex.ru"
-EMAIL_HOST_PASSWORD = 'bdrhimzttcfbgwks'
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
 EMAIL_USE_SSL = True
 
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
