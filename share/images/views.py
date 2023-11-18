@@ -26,6 +26,7 @@ from .models import Image
 # > FLUSHDB - очищает текущую активную базу данных
 # > FLUSHALL - очищает все существующие базы данных
 
+
 r = redis.Redis(host=settings.REDIS_HOST, port=settings.REDIS_PORT,
                 db=settings.REDIS_DB)
 
