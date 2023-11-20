@@ -8,3 +8,5 @@
 /share/information.log
 /share/.env
 !/Icon
+**/__pycache__
+
