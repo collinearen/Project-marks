@@ -4,13 +4,20 @@ from pathlib import Path
 from django.urls import reverse_lazy
 from dotenv import load_dotenv
 
-from account.logging_formatters import CustomJsonFormatter
+from logging_settings import LOG_SET
 
 load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+
 SECRET_KEY = os.environ.get("SECRET_KEY")
-DEBUG = False
+DEBUG = True
+
+if DEBUG:
+    import mimetypes
+
+    mimetypes.add_type('application/javascript', '.js', True)
+    mimetypes.add_type('text/css', '.css', True)
 
 ALLOWED_HOSTS = ['mysite.com', 'localhost', '127.0.0.1']
 
@@ -63,20 +70,22 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'share.wsgi.application'
 
-# Database
-# https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
+# <---   Database Section  --->
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'shareit',
+        'NAME': os.environ.get("DB_NAME"),
+        'PASSWORD': os.environ.get("DB_PASSWORD"),
         'USER': 'postgres',
-        'PASSWORD': '0000',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
 }
+
+REDIS_HOST = 'localhost'
+REDIS_PORT = 6379
+REDIS_DB = 0
 
 CACHES = {
     'default': {
@@ -88,44 +97,10 @@ CACHES = {
     }
 }
 
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'formatters': {
-        'main_format': {
-            'format': "{asctime}    {levelname}    {filename}    {message}",
-            'style': "{"
-        },
-        'json_formatter': {
-            '()': CustomJsonFormatter,
-        }
-    },
-    'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
-            # На консоль я оставлю main formatter, так как было изначально в Django
-            'formatter': 'main_format',
-        },
+# <---  LOGGING SETTINGS  --->
+LOGGING = LOG_SET
 
-        'file': {
-            'class': 'logging.FileHandler',
-            'formatter': 'json_formatter',
-            # А на запись в файл я поставлю json formatter
-            'filename': "information.log"
-        }
-    },
-    'loggers': {
-        "main": {
-            "handlers": ['console', 'file'],
-            'level': 'INFO',
-            'propagate': True,
-        },
-    },
-}
-
-# Password validation
-# https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
-
+# <---  VALID SETTINGS  --->
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -141,23 +116,20 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# <---   Other settings    --->
 LANGUAGE_CODE = 'ru-ru'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_TZ = True
 
 STATIC_URL = 'static/'
+MEDIA_URL = 'media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = 'dashboard'
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
-
-MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 AUTHENTICATION_BACKENDS = [
@@ -192,20 +164,10 @@ INTERNAL_IPS = [
     '127.0.0.1',
 ]
 
-REDIS_HOST = 'localhost'
-REDIS_PORT = 6379
-REDIS_DB = 0
-
-if DEBUG:
-    import mimetypes
-
-mimetypes.add_type('application/javascript', '.js', True)
-mimetypes.add_type('text/css', '.css', True)
-
 # <-- EMAIL YANDEX-->
 
-EMAIL_HOST = 'smtp.yandex.ru'
-EMAIL_PORT = 465
+EMAIL_HOST = os.environ.get("EMAIL_HOST")
+EMAIL_PORT = os.environ.get("EMAIL_PORT")
 EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
 EMAIL_USE_SSL = True
