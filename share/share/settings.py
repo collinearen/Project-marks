@@ -4,7 +4,7 @@ from pathlib import Path
 from django.urls import reverse_lazy
 from dotenv import load_dotenv
 
-from logging_settings import LOG_SET
+from .logging_settings import LOG_SET
 
 load_dotenv()
 
