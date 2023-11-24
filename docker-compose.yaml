@@ -1,0 +1,43 @@
+version: "3"
+services:
+  db:
+    image: postgres:14.4-alpine
+    container_name: db
+    restart: "always"
+    volumes:
+      - psql_volume:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=${DB_USER:-postgres}
+      - POSTGRES_PASSWORD=${DB_PASS:-admin}
+      - POSTGRES_DB=${DB_NAME:-static}
+    ports:
+      - "5432:5432"
+
+  redis:
+    image: redis:6.2-alpine
+    container_name: redis
+    restart: always
+    ports:
+      - '6379:6379'
+    command: redis-server --save 20 1 --loglevel warning
+    volumes: 
+      - cache:/data
+
+  app:
+    container_name: django_app
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - DB_NAME=${DB_NAME:-static}
+      - DB_PASSWORD=${DB_PASS:-admin}
+      - DB_USER=${DB_USER:-postgres}
+      - DB_HOST=db
+      - DB_PORT=5432
+      - SECRET_KEY=kfjghjisdghsdghusdvbfhdfbvj2345234
+
+volumes:
+  psql_volume:
+  cache:
