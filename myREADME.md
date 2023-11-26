@@ -1,6 +1,3 @@
-<!-- Add banner here -->
-![Banner](./header.png)
-
 # ***About my project***
 
 
@@ -45,16 +42,16 @@
         the selectors are used to find all IMG elements whose SRC attribute ends with .jpg, .jpeg, .webp. png respectively. Using these selectors with ***document.querySelectorAll()*** function helps to find all **JPEG**, and **PNG** images on a website. The ***forEach()*** loop then iterates through the results. Small and overly large images are removed because they are not considered suitable. As a result, only those images whose dimensions exceed the dimensions specified in the **minWidth**, **minHeight**, **maxWidth**, **maxHeight** variables are taken into account.
 
         Below is the implementation
-            ![Alt text](image-2.png)
+            ![Alt text](https://github.com/collinearen/share-this-project/blob/test_case/image-2.png)
 
     * The display of user images is implemented using **thumbnails** - small images representing a large image. Thumbnails load quickly in the browser and are a good way to display images in different sizes. For this project, the <a href="https://pypi.org/project/easy-thumbnails/">easy-thumbnails</a> library was used (a utility that allows you to create thumbnails of images. It can process images in batch mode, supports all common image formats), which was ideal and allowed us to create thumbnails.
     For example
-    ![Alt text](image-3.png)
+    ![Alt text](https://github.com/collinearen/share-this-project/blob/test_case/image-3.png)
 
 
 ,
 
-![Alt text](image-1.png)
+![Alt text](https://github.com/collinearen/share-this-project/blob/test_case/image.png)
 
 
 
