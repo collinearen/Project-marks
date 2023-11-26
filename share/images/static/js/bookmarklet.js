@@ -2,8 +2,8 @@ const siteUrl = '//127.0.0.1:8000/';
 const styleUrl = siteUrl + 'static/css/bookmarklet.css';
 const minWidth = 250;
 const minHeight = 250;
-const maxWidth = 1920;
-const maxHeight = 1080;
+const maxWidth = 1080;
+const maxHeight = 1920;
 
 // Загружаем CSS
 var head = document.getElementsByTagName('head')[0];  // Get HTML head element
@@ -39,7 +39,8 @@ function bookmarkletLaunch() {
         });
 
     // Поиск изображений в DOM с релевантными размерами
-    images = document.querySelectorAll('img[src$=".jpg"], img[src$=".jpeg"], img[src$=".png"], img[src$=".webp"]');
+    images = document.querySelectorAll(
+        'img[src$=".jpg"], img[src$=".jpeg"], img[src$=".png"], img[src$=".webp"]');
     images.forEach(image => {
         if (image.naturalWidth >= minWidth
             && image.naturalHeight >= minHeight
