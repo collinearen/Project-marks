@@ -1,6 +1,4 @@
 /venv
-/share/cert.key
-/share/cert.crt
 /share/media
 /share/.pytest_cache
 /share/share/secret_settings.py
