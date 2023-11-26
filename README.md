@@ -1,4 +1,4 @@
-[Русский](/путь/к/русскому/файлу.md)
+[Русский](https://github.com/collinearen/share-this-project/blob/test_case/READMEru.md)
 
 # <p align="center">***About my project***</p>
 
