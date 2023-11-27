@@ -61,6 +61,8 @@
     ```python
     r.zincrby('image_ranking', 1, image.id)
     ```
+  * Added project feature. **Logging** in Django is needed to record information about the actions taking place in your web application. It allows you to track various events such as model requests, URL hits, errors, and exceptions that occur while your application is running.
+The project implements logging of only a few functions, so in the future it will be possible to expand their capabilities
 
 
 # <p align="center">All technologies, libraries that I used in this project</p>
